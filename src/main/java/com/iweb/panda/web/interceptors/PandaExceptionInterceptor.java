@@ -54,14 +54,15 @@ public class PandaExceptionInterceptor extends ExceptionHandlerExceptionResolver
                 // 主键冲突
                 else if (e instanceof org.springframework.dao.DuplicateKeyException) {
                     logger.error(e.getMessage());
-                    // result.setCode(ErrorCode.ERROR_REPEAT);
+                    result.setErrcode(ErrorCode.ERROR_REPEAT);
                 } else if (e.getCause() instanceof java.net.ConnectException) {
                     logger.error(e.getMessage());
-                    // result.setCode(ErrorCode.ACTION_NOT_EXIST);
+                    result.setErrcode(ErrorCode.ACTION_NOT_EXIST);
                 } else {
                     // 未知错误，打印堆栈
                     e.printStackTrace();
-                    // result.setCode(ErrorCode.UNKNOW);
+                    logger.error(e.getMessage(), e);
+                    result.setErrcode(ErrorCode.UNKNOW);
                 }
                 // writer.write(JSON.toJSONString(result));
                 return new ModelAndView();
