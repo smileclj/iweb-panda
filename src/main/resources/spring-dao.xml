@@ -11,7 +11,7 @@
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="com.iweb.panda.mapper" />
-    <context:component-scan base-package="com.iweb.panda.service.impl" />
+<!--     <context:component-scan base-package="com.iweb.panda.service.impl" /> -->
     <!--数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -53,12 +53,15 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+        <!--configLocation属性指定mybatis的核心配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--mapperLocations指定映射文件路径 -->
         <property name="mapperLocations" value="classpath:com/iweb/panda/mapper/xml/*.xml" />
     </bean>
     
      <!--scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="annotationClass" value="javax.annotation.Resource" />
          <!--Mapper接口所在包名，Spring会自动查找其下的Mapper -->
         <property name="basePackage" value="com.iweb.panda.mapper"/>
     </bean>

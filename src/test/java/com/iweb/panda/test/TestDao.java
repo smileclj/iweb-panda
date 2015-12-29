@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.iweb.panda.entity.UserDo;
+import com.iweb.panda.mapper.UserDoMapper;
 import com.iweb.panda.mapper.UserDoMapperExt;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -16,12 +17,15 @@ public class TestDao {
 
     @Resource
     private UserDoMapperExt userDoMappperExt;
+    @Resource
+    private UserDoMapper    userDoMapper;
 
     @Test
     public void testUserDoMapper() {
-        UserDo user = new UserDo();
-        user.setNickname("陈1");
-        userDoMappperExt.insertSelective(user);
-
+        // UserDo user = new UserDo();
+        // user.setNickname("陈1");
+        // userDoMappperExt.insertSelective(user);
+        System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
+        System.out.println(userDoMapper.selectByPrimaryKey(297901).getNickname());
     }
 }

@@ -2,6 +2,6 @@ package com.iweb.panda.mapper;
 
 import javax.annotation.Resource;
 
-@Resource(name="userDoMapperExt")
+@Resource
 public interface UserDoMapperExt extends UserDoMapper {
 }

@@ -27,6 +27,28 @@ public class MapperExtGenerateplugin extends PluginAdapter {
     private static String ANNOTATION_RESOURCE = "javax.annotation.Resource";
 
     @Override
+    public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
+
+        XmlElement parentElement = document.getRootElement();
+
+        _updateDocumentNameSpace(introspectedTable, parentElement);
+
+        return super.sqlMapDocumentGenerated(document, introspectedTable);
+    }
+
+    private void _updateDocumentNameSpace(IntrospectedTable introspectedTable, XmlElement parentElement) {
+        Attribute namespaceAttribute = null;
+        for (Attribute attribute : parentElement.getAttributes()) {
+            if (attribute.getName().equals("namespace")) {
+                namespaceAttribute = attribute;
+            }
+        }
+        parentElement.getAttributes().remove(namespaceAttribute);
+        parentElement.getAttributes().add(new Attribute("namespace", introspectedTable.getMyBatis3JavaMapperType()
+                                                                     + JAVAFILE_SUFFIX));
+    }
+
+    @Override
     public List<GeneratedJavaFile> contextGenerateAdditionalJavaFiles(IntrospectedTable introspectedTable) {
         FullyQualifiedJavaType type = new FullyQualifiedJavaType(introspectedTable.getMyBatis3JavaMapperType()
                                                                  + JAVAFILE_SUFFIX);
