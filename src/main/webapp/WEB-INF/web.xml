@@ -32,13 +32,28 @@
 	</filter-mapping>
 
 	<!--spring mvc -->
-	<!-- <servlet> <servlet-name>dispatcher</servlet-name> <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> 
-		初始化参数配置 <init-param> <param-name>dispatchOptionsRequest</param-name> <param-value>true</param-value> 
-		</init-param> <init-param> <param-name>dispatchTraceRequest</param-name> 
-		<param-value>true</param-value> </init-param> <init-param> <param-name>contextConfigLocation</param-name> 
-		<param-value>classpath:spring-mvc.xml</param-value> </init-param> <load-on-startup>1</load-on-startup> 
-		</servlet> <servlet-mapping> <servlet-name>dispatcher</servlet-name> <url-pattern>*.htm</url-pattern> 
-		</servlet-mapping> -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 初始化参数配置 支持http options和trace请求-->
+		<init-param>
+			<param-name>dispatchOptionsRequest</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dispatchTraceRequest</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
 
 	<!--30分钟后session失效 -->
 	<session-config>
@@ -46,10 +61,8 @@
 	</session-config>
 
 	<!--web容器url的默认匹配路径,web容器url在应用服务器中配置，/或者/a等 -->
-	<!-- <welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-	</welcome-file-list> -->
+	<!-- <welcome-file-list> <welcome-file>index.html</welcome-file> <welcome-file>index.htm</welcome-file> 
+		</welcome-file-list> -->
 
 	<error-page>
 		<error-code>404</error-code>

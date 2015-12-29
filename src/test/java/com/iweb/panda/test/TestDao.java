@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -15,6 +17,7 @@ import com.iweb.panda.mapper.UserDoMapperExt;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class TestDao {
 
+    private Logger          logger = LoggerFactory.getLogger(getClass());
     @Resource
     private UserDoMapperExt userDoMappperExt;
     @Resource
@@ -22,12 +25,12 @@ public class TestDao {
 
     @Test
     public void testUserDoMapper() {
-        // System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
+        System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
         // System.out.println(userDoMapper.selectByPrimaryKey(297901).getNickname());
 
-        UserDo user = new UserDo();
-        user.setNickname("陈1");
-        userDoMappperExt.insertSelective(user);
-
+        // UserDo user = new UserDo();
+        // user.setNickname("陈1");
+        // userDoMappperExt.insertSelective(user);
+        logger.info("info");
     }
 }
