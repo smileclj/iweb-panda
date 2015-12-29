@@ -22,10 +22,12 @@ public class TestDao {
 
     @Test
     public void testUserDoMapper() {
-        // UserDo user = new UserDo();
-        // user.setNickname("陈1");
-        // userDoMappperExt.insertSelective(user);
-        System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
-        System.out.println(userDoMapper.selectByPrimaryKey(297901).getNickname());
+        // System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
+        // System.out.println(userDoMapper.selectByPrimaryKey(297901).getNickname());
+
+        UserDo user = new UserDo();
+        user.setNickname("陈1");
+        userDoMappperExt.insertSelective(user);
+
     }
 }

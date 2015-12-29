@@ -61,6 +61,7 @@
     
      <!--scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<!-- 只查找Ext -->
     	<property name="annotationClass" value="javax.annotation.Resource" />
          <!--Mapper接口所在包名，Spring会自动查找其下的Mapper -->
         <property name="basePackage" value="com.iweb.panda.mapper"/>
