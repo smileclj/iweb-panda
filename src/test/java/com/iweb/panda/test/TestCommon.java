@@ -15,6 +15,7 @@ import com.iweb.panda.entity.ClassC;
 import com.iweb.panda.entity.RefClass;
 import com.iweb.panda.entity.TestObject;
 import com.iweb.panda.util.JsonUtil;
+import com.iweb.panda.util.common.BeanUtil;
 
 public class TestCommon {
 
@@ -35,6 +36,7 @@ public class TestCommon {
         TestObject o = new TestObject();
         System.out.println(JSON.toJSONString(o));
 
+        System.out.println(JSON.toJSONString(null).equals("null"));
     }
 
     @Test
@@ -73,5 +75,31 @@ public class TestCommon {
         BeanUtils.copyProperties(c, a);
         System.out.println(JsonUtil.toJsonString(c));
 
+    }
+
+    @Test
+    public void testBeanUtil2() throws Exception {
+        ClassA a = new ClassA();
+        a.setC_boolean(true);
+        a.setC_byte((byte) 3);
+        a.setC_char('你');
+        a.setC_date(new Date());
+        a.setC_double(1.2);
+        a.setC_float(1.2f);
+        a.setC_int(2);
+        a.setC_long(33);
+        a.setC_shrot((short) 3);
+        a.setC_string("啦啦");
+        a.setRef(new RefClass(1, "refa"));
+
+        ClassB b = new ClassB();
+        b.setC_boolean(false);
+        b.setC_byte((byte) 4);
+        b.setC_char('海');
+        b.setC_date(null);
+        b.setC_double(2.4);
+        
+        BeanUtil.copyProperties(a, b);
+        System.out.println(JsonUtil.toJsonString(a));
     }
 }
