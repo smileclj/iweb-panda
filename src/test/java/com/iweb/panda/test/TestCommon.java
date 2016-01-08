@@ -1,5 +1,6 @@
 package com.iweb.panda.test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -64,7 +65,7 @@ public class TestCommon {
         a.setC_string("啦啦");
         a.setRef(new RefClass(1, "refa"));
 
-        ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
+//        ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
         // System.out.println(JsonUtil.toJsonString(copy_A));
 
         ClassB b = new ClassB();
@@ -101,5 +102,14 @@ public class TestCommon {
         
         BeanUtil.copyProperties(a, b);
         System.out.println(JsonUtil.toJsonString(a));
+    }
+    
+    @Test
+    public void testDate() throws Exception{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date d1 = sdf.parse("2016-01-06 15:12:19");
+        Date d2 = sdf.parse("2016-01-06 15:12:20");
+        System.out.println(d1.after(d2));
+        System.out.println(d1.before(d2));
     }
 }
