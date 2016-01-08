@@ -29,7 +29,7 @@
     <logger name="java.sql.PreparedStatement" level="DEBUG" />
 
     <Loggers>
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="RollingFile"/>
         </Root>

@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.iweb</groupId>
-	<artifactId>panda</artifactId>
+	<artifactId>iweb-panda</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>panda</name>
@@ -46,6 +46,12 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
 		</dependency>
 
 		<!-- 日志 -->
@@ -207,6 +213,6 @@
 		<!--Spring End -->
 	</dependencies>
 	<build>
-		<finalName>panda</finalName>
+		<finalName>iweb-panda</finalName>
 	</build>
 </project>

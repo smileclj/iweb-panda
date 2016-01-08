@@ -69,4 +69,9 @@ public class Result implements Serializable {
     public void setResult(Object result) {
         this.result = result;
     }
+
+    public void setError(ErrorCode errcode) {
+        this.errcode = errcode.getValue();
+        this.errmsg = errcode.getMsg();
+    }
 }

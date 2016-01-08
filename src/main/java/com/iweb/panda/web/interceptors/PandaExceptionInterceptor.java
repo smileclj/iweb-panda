@@ -7,6 +7,7 @@ package com.iweb.panda.web.interceptors;
 import com.iweb.panda.common.enums.ErrorCode;
 import com.iweb.panda.common.exceptions.PandaException;
 import com.iweb.panda.common.resp.Result;
+import com.iweb.panda.util.JsonUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,22 +50,22 @@ public class PandaExceptionInterceptor extends ExceptionHandlerExceptionResolver
                 Result result = new Result();
                 if (e instanceof PandaException) {
                     logger.error(e.getMessage());
-                    result.setErrcode(((PandaException) e).getErrorCode());
+                    result.setError(((PandaException) e).getErrorCode());
                 }
                 // 主键冲突
                 else if (e instanceof org.springframework.dao.DuplicateKeyException) {
                     logger.error(e.getMessage());
-                    result.setErrcode(ErrorCode.ERROR_REPEAT);
+                    result.setError(ErrorCode.ERROR_REPEAT);
                 } else if (e.getCause() instanceof java.net.ConnectException) {
                     logger.error(e.getMessage());
-                    result.setErrcode(ErrorCode.ACTION_NOT_EXIST);
+                    result.setError(ErrorCode.ACTION_NOT_EXIST);
                 } else {
                     // 未知错误，打印堆栈
                     e.printStackTrace();
                     logger.error(e.getMessage(), e);
-                    result.setErrcode(ErrorCode.UNKNOW);
+                    result.setError(ErrorCode.UNKNOW);
                 }
-                // writer.write(JSON.toJSONString(result));
+                writer.write(JsonUtil.toJsonString(result));
                 return new ModelAndView();
             } catch (IOException ioe) {
                 logger.error("exception io error");
