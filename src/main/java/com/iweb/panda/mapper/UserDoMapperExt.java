@@ -1,7 +1,7 @@
 package com.iweb.panda.mapper;
 
-import javax.annotation.Resource;
+import org.springframework.stereotype.Repository;
 
-@Resource
+@Repository
 public interface UserDoMapperExt extends UserDoMapper {
 }

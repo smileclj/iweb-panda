@@ -20,11 +20,13 @@ import org.mybatis.generator.config.PropertyRegistry;
 
 public class MapperExtGenerateplugin extends PluginAdapter {
 
-    private static String XMLFILE_SUFFIX      = "Ext";
+    private static String XMLFILE_SUFFIX  = "Ext";
 
-    private static String JAVAFILE_SUFFIX     = "Ext";
+    private static String JAVAFILE_SUFFIX = "Ext";
 
-    private static String ANNOTATION_RESOURCE = "javax.annotation.Resource";
+    private static String ANNOTATION_TYPE = "org.springframework.stereotype.Repository";
+
+    private static String ANNOTATION_NAME = "@Repository";
 
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
@@ -60,8 +62,8 @@ public class MapperExtGenerateplugin extends PluginAdapter {
                                                                            introspectedTable.getMyBatis3JavaMapperType());
         _interface.addSuperInterface(base_interface);
 
-        FullyQualifiedJavaType annotation = new FullyQualifiedJavaType(ANNOTATION_RESOURCE);
-        _interface.addAnnotation("@Resource");
+        FullyQualifiedJavaType annotation = new FullyQualifiedJavaType(ANNOTATION_TYPE);
+        _interface.addAnnotation(ANNOTATION_NAME);
         _interface.addImportedType(annotation);
 
         CompilationUnit compilationUnits = _interface;

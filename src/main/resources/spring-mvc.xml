@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
@@ -9,11 +10,16 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd
                            http://www.springframework.org/schema/websocket
-                           http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+                           http://www.springframework.org/schema/websocket/spring-websocket.xsd
+                           http://www.springframework.org/schema/aop
+						   http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.iweb.panda.controller" />
-
+	<context:component-scan base-package="com.iweb.panda.web" />
+	<context:component-scan base-package="com.iweb.panda.util" />
+	<aop:aspectj-autoproxy/>
+	
 	<bean id="contentNegotiationManager"
 		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<!-- 扩展名至mimeType的映射,即 /user.json => application/json -->
@@ -44,10 +50,10 @@
 	<!--全局异常统一处理 -->
 	<bean class="com.iweb.panda.web.interceptors.PandaExceptionInterceptor"></bean>
 
-	<!-- <mvc:interceptors> <mvc:interceptor> -->
-	<!-- 默认所有的请求都进行拦截 -->
-	<!-- <mvc:mapping path="/**" /> -->
-	<!-- out路径下的不进行拦截 -->
-	<!-- <mvc:exclude-mapping path="/out/**" /> <bean class="com.iweb.panda.web.interceptors.PandaInterceptor"></bean> 
-		</mvc:interceptor> </mvc:interceptors> -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.iweb.panda.web.interceptors.PandaInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
