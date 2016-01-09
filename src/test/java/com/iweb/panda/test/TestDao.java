@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.iweb.panda.entity.UserDo;
 import com.iweb.panda.mapper.UserDoMapper;
 import com.iweb.panda.mapper.UserDoMapperExt;
 

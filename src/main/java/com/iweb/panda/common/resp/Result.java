@@ -1,9 +1,9 @@
 package com.iweb.panda.common.resp;
 
-import com.iweb.panda.common.enums.ErrorCode;
-
 import java.io.Serializable;
 import java.util.HashMap;
+
+import com.iweb.panda.common.enums.ErrorCode;
 
 public class Result implements Serializable {
 

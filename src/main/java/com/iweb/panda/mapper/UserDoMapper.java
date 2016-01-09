@@ -1,8 +1,9 @@
 package com.iweb.panda.mapper;
 
+import java.util.List;
+
 import com.iweb.panda.entity.UserDo;
 import com.iweb.panda.entity.UserDoExample;
-import java.util.List;
 
 public interface UserDoMapper {
     /**

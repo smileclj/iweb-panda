@@ -4,10 +4,12 @@
  */
 package com.iweb.panda.web.interceptors;
 
-import com.iweb.panda.common.enums.ErrorCode;
-import com.iweb.panda.common.exceptions.PandaException;
-import com.iweb.panda.common.resp.Result;
-import com.iweb.panda.util.JsonUtil;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Method;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +17,10 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.Method;
+import com.iweb.panda.common.enums.ErrorCode;
+import com.iweb.panda.common.exceptions.PandaException;
+import com.iweb.panda.common.resp.Result;
+import com.iweb.panda.util.JsonUtil;
 
 /**
  * 不必在Controller中对异常进行处理，抛出即可，由此异常解析器统一控制。<br>
