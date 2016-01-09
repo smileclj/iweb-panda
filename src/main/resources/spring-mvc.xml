@@ -37,22 +37,17 @@
 	<mvc:annotation-driven
 		content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters>
-			<bean
-				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
-				<!-- <bean class="com.iweb.panda.web.PandaJackSonHttpMessageConverter"></bean> -->
+			<bean class="com.iweb.panda.web.PandaJackSonHttpMessageConverter"></bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
 	<!--全局异常统一处理 -->
 	<bean class="com.iweb.panda.web.interceptors.PandaExceptionInterceptor"></bean>
-	
-	<mvc:interceptors>
-        <mvc:interceptor>
-            <!-- 默认所有的请求都进行拦截 -->
-            <mvc:mapping path="/**" />
-            <!-- out路径下的不进行拦截 -->
-            <mvc:exclude-mapping path="/out/**" />
-            <bean class="com.iweb.panda.web.interceptors.PandaInterceptor"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
+
+	<!-- <mvc:interceptors> <mvc:interceptor> -->
+	<!-- 默认所有的请求都进行拦截 -->
+	<!-- <mvc:mapping path="/**" /> -->
+	<!-- out路径下的不进行拦截 -->
+	<!-- <mvc:exclude-mapping path="/out/**" /> <bean class="com.iweb.panda.web.interceptors.PandaInterceptor"></bean> 
+		</mvc:interceptor> </mvc:interceptors> -->
 </beans>
