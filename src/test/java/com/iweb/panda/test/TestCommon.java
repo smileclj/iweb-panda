@@ -10,6 +10,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.CaseFormat;
 import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
@@ -111,5 +112,13 @@ public class TestCommon {
         Date d2 = sdf.parse("2016-01-06 15:12:20");
         System.out.println(d1.after(d2));
         System.out.println(d1.before(d2));
+    }
+    
+    @Test
+    public void testGuava(){
+        System.out.println(CaseFormat.LOWER_UNDERSCORE.toString());
+        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "test.data"));
+        
+        
     }
 }
