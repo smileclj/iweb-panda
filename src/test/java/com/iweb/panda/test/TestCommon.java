@@ -6,8 +6,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.CaseFormat;
@@ -20,6 +21,8 @@ import com.iweb.panda.util.JsonUtil;
 import com.iweb.panda.util.common.BeanUtil;
 
 public class TestCommon {
+
+    private static final Logger logger = LoggerFactory.getLogger(TestCommon.class);
 
     @Test
     public void testJackson() {
@@ -66,17 +69,19 @@ public class TestCommon {
         a.setC_string("啦啦");
         a.setRef(new RefClass(1, "refa"));
 
-//        ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
+        // ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
         // System.out.println(JsonUtil.toJsonString(copy_A));
 
-        ClassB b = new ClassB();
-        BeanUtils.copyProperties(b, a);
+        // ClassB b = new ClassB();
+        // BeanUtil.copyProperties(b, a);
         // System.out.println(JsonUtil.toJsonString(b));
 
         ClassC c = new ClassC();
-        BeanUtils.copyProperties(c, a);
+        long start = System.currentTimeMillis();
+        BeanUtil.copyProperties(c, a);
+        long end = System.currentTimeMillis();
         System.out.println(JsonUtil.toJsonString(c));
-
+        logger.info("耗时:{}ms", end - start);
     }
 
     @Test
@@ -100,25 +105,29 @@ public class TestCommon {
         b.setC_char('海');
         b.setC_date(null);
         b.setC_double(2.4);
-        
+
         BeanUtil.copyProperties(a, b);
         System.out.println(JsonUtil.toJsonString(a));
     }
-    
+
     @Test
-    public void testDate() throws Exception{
+    public void testDate() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d1 = sdf.parse("2016-01-06 15:12:19");
         Date d2 = sdf.parse("2016-01-06 15:12:20");
         System.out.println(d1.after(d2));
         System.out.println(d1.before(d2));
     }
-    
+
     @Test
-    public void testGuava(){
+    public void testGuava() {
         System.out.println(CaseFormat.LOWER_UNDERSCORE.toString());
         System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "test.data"));
-        
-        
+
+    }
+    
+    @Test
+    public void testMath(){
+        System.out.println((int)(2/258*10000));
     }
 }

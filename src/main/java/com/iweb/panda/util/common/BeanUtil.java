@@ -1,22 +1,33 @@
 package com.iweb.panda.util.common;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.sf.cglib.beans.BeanCopier;
 
 public class BeanUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(BeanUtil.class);
+    private static final Map<String, BeanCopier> BEAN_COPIERS = new HashMap<String, BeanCopier>();
 
-    public static void copyProperties(Object dest, Object orig) throws IllegalAccessException,
-                                                               InvocationTargetException {
-        try {
-            BeanUtils.copyProperties(dest, orig);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            logger.error("对象拷贝失败", e);
-            throw e;
+    public static void copyProperties(Object dest, Object src) {
+        String key = genKey(src.getClass(), dest.getClass());
+        BeanCopier copier = null;
+        if (!BEAN_COPIERS.containsKey(key)) {
+            copier = BeanCopier.create(src.getClass(), dest.getClass(), false);
+            BEAN_COPIERS.put(key, copier);
+        } else {
+            copier = BEAN_COPIERS.get(key);
         }
+        copier.copy(src, dest, null);
     }
+
+    private static String genKey(Class<?> srcClazz, Class<?> destClazz) {
+        return srcClazz.getName() + destClazz.getName();
+    }
+
+    // 此方法比较耗性能
+    // public static void copyProperties(Object dest, Object orig) throws IllegalAccessException,
+    // InvocationTargetException {
+    // BeanUtils.copyProperties(dest, orig);
+    // }
 }
