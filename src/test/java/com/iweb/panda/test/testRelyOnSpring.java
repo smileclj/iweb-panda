@@ -1,7 +1,5 @@
 package com.iweb.panda.test;
 
-import java.util.Locale;
-
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -12,14 +10,11 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.iweb.panda.entity.Prop;
-import com.iweb.panda.util.JsonUtil;
-import com.iweb.panda.util.config.RedisConfig;
-import com.rabbitmq.tools.json.JSONUtil;
-
 import redis.clients.jedis.Jedis;
 
-// import com.iweb.panda.util.RedisUtil;
+import com.iweb.panda.util.JsonUtil;
+import com.iweb.panda.util.RedisUtil;
+import com.iweb.panda.util.config.RedisConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
@@ -32,16 +27,16 @@ public class testRelyOnSpring implements ApplicationContextAware {
         this.context = context;
     }
 
-    // @Resource
-    // private RedisUtil redisUtil;
+    @Resource
+    private RedisUtil redisUtil;
 
-    // @Test
-    // public void testRedis() {
-    // Jedis jedis = redisUtil.getJedis();
-    // if (jedis != null) {
-    // System.out.println(jedis.get("name"));
-    // }
-    // }
+    @Test
+    public void testRedis() {
+        Jedis jedis = redisUtil.getJedis();
+        if (jedis != null) {
+            System.out.println(jedis.get("name"));
+        }
+    }
 
     @Test
     public void testProp() {

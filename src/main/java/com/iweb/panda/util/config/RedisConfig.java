@@ -7,28 +7,28 @@ import org.springframework.stereotype.Component;
 public class RedisConfig {
 
     @Value("${redis.host}")
-    private String  redisHost;
+    private String redisHost;
     @Value("${redis.port}")
-    private int     redisPort;
+    private String redisPort;
     @Value("${redis.password}")
-    private String  redisPassword;
+    private String redisPassword;
     @Value("${redis.timeout}")
-    private int     redisTimeout;
+    private String redisTimeout;
     @Value("${redis.maxTotal}")
-    private int     redisMaxTotal;
+    private String redisMaxTotal;
     @Value("${redis.maxIdle}")
-    private int     redisMaxIdle;
+    private String redisMaxIdle;
     @Value("${redis.maxWaitMillis}")
-    private int     redisMaxWaitMillis;
+    private String redisMaxWaitMillis;
     @Value("${redis.testOnBorrow}")
-    private boolean redisTestOnBorrow;
+    private String redisTestOnBorrow;
 
     public String getRedisHost() {
         return redisHost;
     }
 
     public int getRedisPort() {
-        return redisPort;
+        return Integer.valueOf(redisPort);
     }
 
     public String getRedisPassword() {
@@ -36,23 +36,23 @@ public class RedisConfig {
     }
 
     public int getRedisTimeout() {
-        return redisTimeout;
+        return Integer.valueOf(redisTimeout);
     }
 
     public int getRedisMaxTotal() {
-        return redisMaxTotal;
+        return Integer.valueOf(redisMaxTotal);
     }
 
     public int getRedisMaxIdle() {
-        return redisMaxIdle;
+        return Integer.valueOf(redisMaxIdle);
     }
 
     public int getRedisMaxWaitMillis() {
-        return redisMaxWaitMillis;
+        return Integer.valueOf(redisMaxWaitMillis);
     }
 
     public boolean isRedisTestOnBorrow() {
-        return redisTestOnBorrow;
+        return Boolean.valueOf(redisTestOnBorrow);
     }
 
 }
