@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.iweb.panda.service.UserService;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 }
