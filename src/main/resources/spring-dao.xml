@@ -9,21 +9,19 @@
                            http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd">
-	<context:property-placeholder location="classpath:jdbc.properties" system-properties-mode="OVERRIDE" /><!-- 系统属性优先 -->
-	
     <context:component-scan base-package="com.iweb.panda.mapper" />
     <context:component-scan base-package="com.iweb.panda.service.impl" />
     <!--数据源-->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
         <property name="initialSize" value="${jdbc.initialSize}"/>
-        <property name="maxActive" value="${jdbc.maxActive}"/>
+        <property name="maxTotal" value="${jdbc.maxTotal}"/>
         <property name="maxIdle" value="${jdbc.maxIdle}"/>
         <property name="minIdle" value="${jdbc.minIdle}"/>
-        <property name="maxWait" value="${jdbc.maxWait}"/>
+        <property name="maxWaitMillis" value="${jdbc.maxWaitMillis}"/>
         <property name="validationQuery" value="${jdbc.validationQuery}"/>
         <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
         <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
@@ -32,7 +30,7 @@
         <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
         <property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}"/>
         <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
-        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+        <property name="removeAbandonedOnBorrow" value="${jdbc.removeAbandonedOnBorrow}"/>
         <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
     </bean>
 

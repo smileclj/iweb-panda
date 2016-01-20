@@ -2,7 +2,6 @@ package com.iweb.panda.test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,13 +9,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.CaseFormat;
 import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
@@ -77,14 +76,16 @@ public class TestCommon {
         // ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
         // System.out.println(JsonUtil.toJsonString(copy_A));
 
-        ClassB b = new ClassB();
-        BeanUtils.copyProperties(b, a);
+        // ClassB b = new ClassB();
+        // BeanUtil.copyProperties(b, a);
         // System.out.println(JsonUtil.toJsonString(b));
 
         ClassC c = new ClassC();
-        BeanUtils.copyProperties(c, a);
+        long start = System.currentTimeMillis();
+        BeanUtil.copyProperties(c, a);
+        long end = System.currentTimeMillis();
         System.out.println(JsonUtil.toJsonString(c));
-
+        logger.info("耗时:{}ms", end - start);
     }
 
     @Test
@@ -131,5 +132,17 @@ public class TestCommon {
         for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
             logger.info("key:{},value:{}", entry.getKey(), URLDecoder.decode((String) entry.getValue(), "UTF-8"));
         }
+    }
+
+    @Test
+    public void testGuava() {
+        System.out.println(CaseFormat.LOWER_UNDERSCORE.toString());
+        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "test.data"));
+
+    }
+    
+    @Test
+    public void testMath(){
+        System.out.println((int)(2/258*10000));
     }
 }
