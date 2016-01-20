@@ -1,15 +1,22 @@
 package com.iweb.panda.test;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
@@ -19,6 +26,8 @@ import com.iweb.panda.util.JsonUtil;
 import com.iweb.panda.util.common.BeanUtil;
 
 public class TestCommon {
+
+    private static final Logger logger = LoggerFactory.getLogger(TestCommon.class);
 
     @Test
     public void testJackson() {
@@ -65,7 +74,7 @@ public class TestCommon {
         a.setC_string("啦啦");
         a.setRef(new RefClass(1, "refa"));
 
-//        ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
+        // ClassA copy_A = (ClassA) BeanUtils.cloneBean(a);
         // System.out.println(JsonUtil.toJsonString(copy_A));
 
         ClassB b = new ClassB();
@@ -99,17 +108,28 @@ public class TestCommon {
         b.setC_char('海');
         b.setC_date(null);
         b.setC_double(2.4);
-        
+
         BeanUtil.copyProperties(a, b);
         System.out.println(JsonUtil.toJsonString(a));
     }
-    
+
     @Test
-    public void testDate() throws Exception{
+    public void testDate() throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date d1 = sdf.parse("2016-01-06 15:12:19");
         Date d2 = sdf.parse("2016-01-06 15:12:20");
         System.out.println(d1.after(d2));
         System.out.println(d1.before(d2));
+    }
+
+    @Test
+    public void testEncode() throws UnsupportedEncodingException {
+        // System.out.println(URLEncoder.encode("你好","UTF-8"));
+        // System.out.println(URLEncoder.encode("abc", "UTF-8"));
+        String str = "{\"action_name\":\"%E6%B5%8B%E8%AF%95%E7%BA%A2%E5%8C%85\",\"etype\":\"CASH\",\"openid\":\"oyv8Qt02HMA5A_YfT8QRmsu2XJdI\",\"remark\":\"a\",\"send_name\":\"a\",\"sign\":\"37e639ee5f5fecd3049bde1a158e178d\",\"system\":\"300\",\"timestamp\":\"1453202996375\",\"total_amount\":\"100\",\"total_num\":\"1\",\"wishing\":\"a\"}";
+        JSONObject jsonObject = JSON.parseObject(str);
+        for (Map.Entry<String, Object> entry : jsonObject.entrySet()) {
+            logger.info("key:{},value:{}", entry.getKey(), URLDecoder.decode((String) entry.getValue(), "UTF-8"));
+        }
     }
 }
