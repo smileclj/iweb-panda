@@ -25,4 +25,9 @@ public class XstreamTest {
         xstream.alias("student", Student.class); // 去掉student前的包名
         logger.info("java对象转xml字符串:{}", xstream.toXML(s));
     }
+
+    @Test
+    public void xmlStrToJava(){
+//        Strint xml = "";
+    }
 }
