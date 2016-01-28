@@ -140,9 +140,17 @@ public class TestCommon {
         System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, "test.data"));
 
     }
-    
+
     @Test
-    public void testMath(){
-        System.out.println((int)(2/258*10000));
+    public void testMath() {
+        System.out.println((int) (2 / 258 * 10000));
+    }
+
+    @Test
+    public void fastjson() {
+        String json = "{\"id\":1,\"name\":\"小明\"}";
+        JSONObject jsonObject = JSON.parseObject(json);
+        jsonObject.put("sex", "男");
+        System.out.println(jsonObject.toJSONString());
     }
 }
