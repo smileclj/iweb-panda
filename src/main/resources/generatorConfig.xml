@@ -7,11 +7,11 @@
 	 	<plugin type="com.iweb.panda.util.mybatis.PageHelperPlugin" />   
 	 
 		<commentGenerator>
-			<property name="suppressDate" value="true" />
+			  <property name="suppressAllComments" value="true"/>  
 		</commentGenerator>
 		<!--数据库链接URL，用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.1.81:3366/joycool" userId="joycool"
+			connectionURL="jdbc:mysql://localhost:3306/panda" userId="root"
 			password="123456">
 		</jdbcConnection>
 		<!-- 生成模型的包名和位置 -->
@@ -34,15 +34,22 @@
 		</javaClientGenerator>
 
 		<!-- 要生成哪些表 -->
-		<table tableName="users"  domainObjectName="UserDo" enableUpdateByExample="false"  enableDeleteByExample="false" >
-            <columnOverride  column="ID" property="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>           
-     		<columnOverride  column="Amounts" property="amounts" javaType="java.lang.Double" jdbcType="DOUBLE"/>
-     		<columnOverride  column="Coins" property="coins" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-     		<columnOverride  column="Diamond" property="diamond" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-     		<columnOverride  column="Sex" property="sex" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-     		<columnOverride  column="CreateTime" property="createTime" javaType="java.util.Date"/>
-     		<columnOverride  column="LastLoginTime" property="lastLoginTime" javaType="java.util.Date"/>
-     		<columnOverride  column="visible" property="visible" javaType="java.lang.Boolean" jdbcType="TINYINT"/>
+		<table tableName="student"  domainObjectName="Student" enableUpdateByExample="false"  enableDeleteByExample="false" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+     		<columnOverride  column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+     		<columnOverride  column="sex" property="sex" javaType="java.lang.Integer" jdbcType="TINYINT"/>
+     		<columnOverride  column="create_time" property="createTime" javaType="java.util.Date"/>
+     	</table> 
+     	<table tableName="course"  domainObjectName="Course" enableUpdateByExample="false"  enableDeleteByExample="false" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>           
+     		<columnOverride  column="name" property="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+     		<columnOverride  column="create_time" property="createTime" javaType="java.util.Date"/>
+     	</table> 
+     	<table tableName="student_course"  domainObjectName="StudentCourse" enableUpdateByExample="false"  enableDeleteByExample="false" >
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>         
+     		<columnOverride  column="student_id" property="studentId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+     		<columnOverride  column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+     		<columnOverride  column="create_time" property="createTime" javaType="java.util.Date"/>
      	</table> 
 	</context>
 </generatorConfiguration>

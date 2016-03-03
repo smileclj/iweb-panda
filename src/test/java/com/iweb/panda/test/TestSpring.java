@@ -24,9 +24,13 @@ public class TestSpring implements ApplicationContextAware {
 
     @Test
     public void getBeanNames() {
-        for (String s : context.getBeanDefinitionNames()) {
-            logger.info(s);
-        }
+//        for (String s : context.getBeanDefinitionNames()) {
+//            logger.info(s);
+//        }
+		try {
+			Thread.sleep(60000);
+		} catch (InterruptedException e) {
+		}
     }
 
 }

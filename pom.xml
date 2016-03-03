@@ -8,6 +8,8 @@
 	<name>panda</name>
 
 	<properties>
+		<package.name>iweb-panda</package.name>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
 		<mybatis.version>3.2.2</mybatis.version>
 		<mysql.version>5.1.31</mysql.version>
@@ -16,7 +18,25 @@
 		<jackson.version>2.6.4</jackson.version>
 		<webapp.contextPath.test>/</webapp.contextPath.test>
 		<webapp.port.test>8877</webapp.port.test>
+		<package.environment>snapshot</package.environment>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
+
+	<!-- 用于maven打包 -->
+	<profiles>
+		<profile>
+			<id>snapshot</id>
+			<properties>
+				<package.environment>snapshot</package.environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>release</id>
+			<properties>
+				<package.environment>release</package.environment>
+			</properties>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<!--test -->
@@ -274,9 +294,16 @@
 			<artifactId>httpasyncclient</artifactId>
 			<version>4.1</version>
 		</dependency>
+		<!-- quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 	</dependencies>
+
 	<build>
-		<finalName>iweb-panda</finalName>
+		<finalName>${package.name}-${project.version}-${package.environment}-${maven.build.timestamp}</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -305,6 +332,19 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>src/main/resources/${package.environment}</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -1,5 +1,7 @@
 package com.iweb.panda.test;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -9,27 +11,33 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.iweb.panda.mapper.UserDoMapper;
-import com.iweb.panda.mapper.UserDoMapperExt;
+import com.iweb.panda.entity.Student;
+import com.iweb.panda.mapper.CourseMapperExt;
+import com.iweb.panda.mapper.StudentMapperExt;
+import com.iweb.panda.util.JsonUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class TestDao {
 
-    private Logger          logger = LoggerFactory.getLogger(getClass());
-    @Resource
-    private UserDoMapperExt userDoMappperExt;
-    @Resource
-    private UserDoMapper    userDoMapper;
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	@Resource
+	private StudentMapperExt studentMapperExt;
+	@Resource
+	private CourseMapperExt courseMapperExt;
 
-    @Test
-    public void testUserDoMapper() {
-        System.out.println(userDoMappperExt.selectByPrimaryKey(297901).getNickname());
-        // System.out.println(userDoMapper.selectByPrimaryKey(297901).getNickname());
+	@Test
+	public void addStudent() {
+		Student student = new Student();
+		student.setName("小张");
+		student.setSex(1);
+		student.setCreateTime(new Date());
+		logger.info("result:{}", studentMapperExt.insertSelective(student));
+		logger.info("id:{}", student.getId());
+	}
 
-        // UserDo user = new UserDo();
-        // user.setNickname("陈1");
-        // userDoMappperExt.insertSelective(user);
-        logger.info("info");
-    }
+	@Test
+	public void getStudent() {
+		logger.info(JsonUtil.toJsonString(studentMapperExt.selectByPrimaryKey(1)));
+	}
 }

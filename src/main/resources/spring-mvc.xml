@@ -17,7 +17,6 @@
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.iweb.panda.controller" />
 	<context:component-scan base-package="com.iweb.panda.web" />
-	<context:component-scan base-package="com.iweb.panda.util" />
 	<aop:aspectj-autoproxy/>
 	
 	<bean id="contentNegotiationManager"
