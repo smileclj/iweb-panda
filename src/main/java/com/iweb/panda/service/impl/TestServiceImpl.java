@@ -1,7 +1,5 @@
 package com.iweb.panda.service.impl;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -23,20 +21,31 @@ public class TestServiceImpl implements TestService {
 	private CourseMapperExt courseMapperExt;
 
 	@Override
-	public void addStudent() {
-		Student student = new Student();
-		student.setName("小明");
-		student.setSex(1);
-		student.setCreateTime(new Date());
+	public void addStudent(Student student) {
 		studentMapperExt.insertSelective(student);
 	}
 
 	@Override
-	public void addCourse() {
-		Course course = new Course();
-		course.setName("语文");
-		course.setCreateTime(new Date());
+	public void addCourse(Course course) {
 		courseMapperExt.insertSelective(course);
+	}
+
+	@Override
+	public void addStudentAndCourse(Student student, Course course, boolean throwException) {
+		addStudent(student);
+		if (throwException) {
+			throw new RuntimeException("addStudentAndCourse exception");
+		}
+		addCourse(course);
+	}
+
+	@Override
+	public void getAddStudentAndCourse(Student student, Course course, boolean throwException) {
+		addStudent(student);
+		if (throwException) {
+			throw new RuntimeException("addStudentAndCourse exception");
+		}
+		addCourse(course);
 	}
 
 }

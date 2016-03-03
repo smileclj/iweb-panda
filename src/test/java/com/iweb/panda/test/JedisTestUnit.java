@@ -2,7 +2,7 @@ package com.iweb.panda.test;
 
 import org.junit.Test;
 
-public class JedisTest {
+public class JedisTestUnit {
 
     @Test
     public void test1() {

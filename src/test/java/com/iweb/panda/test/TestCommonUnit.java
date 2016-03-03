@@ -24,9 +24,9 @@ import com.iweb.panda.entity.TestObject;
 import com.iweb.panda.util.JsonUtil;
 import com.iweb.panda.util.common.BeanUtil;
 
-public class TestCommon {
+public class TestCommonUnit {
 
-	private static final Logger logger = LoggerFactory.getLogger(TestCommon.class);
+	private static final Logger logger = LoggerFactory.getLogger(TestCommonUnit.class);
 
 	@Test
 	public void testJackson() {

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.iweb.panda.util.common.HttpUtil;
 
-public class HttpTest {
+public class HttpTestUnit {
 
     @Test
     public void post() throws UnsupportedEncodingException {

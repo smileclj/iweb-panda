@@ -12,9 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class TestSpring implements ApplicationContextAware {
+public class TestSpringUnit implements ApplicationContextAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestSpring.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestSpringUnit.class);
     private ApplicationContext  context;
 
     @Override

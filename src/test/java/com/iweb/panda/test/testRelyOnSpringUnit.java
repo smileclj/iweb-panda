@@ -29,9 +29,9 @@ import com.rabbitmq.client.Envelope;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class testRelyOnSpring implements ApplicationContextAware {
+public class testRelyOnSpringUnit implements ApplicationContextAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(testRelyOnSpring.class);
+    private static final Logger logger = LoggerFactory.getLogger(testRelyOnSpringUnit.class);
     private ApplicationContext  context;
 
     @Override
