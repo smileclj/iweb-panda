@@ -11,6 +11,7 @@ import com.iweb.panda.entity.Student;
 import com.iweb.panda.mapper.CourseMapperExt;
 import com.iweb.panda.mapper.StudentMapperExt;
 import com.iweb.panda.service.TestService;
+import com.iweb.panda.util.JsonUtil;
 
 @Service("testService")
 public class TestServiceImpl implements TestService {
@@ -46,6 +47,11 @@ public class TestServiceImpl implements TestService {
 			throw new RuntimeException("addStudentAndCourse exception");
 		}
 		addCourse(course);
+	}
+
+	@Override
+	public void getStudentById(int id) {
+		logger.info("student query:{}", JsonUtil.toJsonString(studentMapperExt.selectByPrimaryKey(id)));
 	}
 
 }

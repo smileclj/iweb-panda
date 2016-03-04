@@ -8,7 +8,9 @@ public interface TestService {
 
 	void addCourse(Course course);
 
-	void addStudentAndCourse(Student student, Course course,boolean throwException);
-	
-	void getAddStudentAndCourse(Student student, Course course,boolean throwException);
+	void addStudentAndCourse(Student student, Course course, boolean throwException);
+
+	void getAddStudentAndCourse(Student student, Course course, boolean throwException);
+
+	void getStudentById(int id);
 }

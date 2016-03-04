@@ -34,8 +34,13 @@ public class TestServiceUnit {
 		course.setName("数学");
 		course.setCreateTime(new Date());
 
-		testService.getAddStudentAndCourse(student, course, true);
+		testService.addStudentAndCourse(student, course, true);
 		logger.info("student,name:{},id:{}", student.getName(), student.getId());
 		logger.info("course,name:{},id:{}", course.getName(), course.getId());
+	}
+
+	@Test
+	public void getStudent() {
+		testService.getStudentById(1);
 	}
 }
