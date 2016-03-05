@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.iweb.panda.util.common.HttpUtil;
+import com.panda.iweb.util.common.HttpUtil;
 
 public class HttpTestUnit {
 

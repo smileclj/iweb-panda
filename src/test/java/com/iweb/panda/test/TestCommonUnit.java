@@ -21,8 +21,8 @@ import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
 import com.iweb.panda.entity.RefClass;
 import com.iweb.panda.entity.TestObject;
-import com.iweb.panda.util.JsonUtil;
-import com.iweb.panda.util.common.BeanUtil;
+import com.panda.iweb.util.JsonUtil;
+import com.panda.iweb.util.common.BeanUtil;
 
 public class TestCommonUnit {
 

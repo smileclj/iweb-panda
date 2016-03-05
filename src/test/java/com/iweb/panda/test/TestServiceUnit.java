@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.iweb.panda.entity.Course;
-import com.iweb.panda.entity.Student;
-import com.iweb.panda.service.TestService;
+import com.panda.iweb.entity.Course;
+import com.panda.iweb.entity.Student;
+import com.panda.iweb.service.TestService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")

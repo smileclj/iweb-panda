@@ -17,11 +17,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import redis.clients.jedis.Jedis;
 
-import com.iweb.panda.common.constants.RabbitMqConstant;
-import com.iweb.panda.util.JsonUtil;
-import com.iweb.panda.util.RabbitMqUtil;
-import com.iweb.panda.util.RedisUtil;
-import com.iweb.panda.util.config.RedisConfig;
+import com.panda.iweb.common.constants.RabbitMqConstant;
+import com.panda.iweb.util.JsonUtil;
+import com.panda.iweb.util.RabbitMqUtil;
+import com.panda.iweb.util.RedisUtil;
+import com.panda.iweb.util.config.RedisConfig;
 import com.rabbitmq.client.AMQP.BasicProperties;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;

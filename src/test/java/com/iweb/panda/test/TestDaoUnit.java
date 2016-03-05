@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.iweb.panda.entity.Student;
-import com.iweb.panda.mapper.CourseMapperExt;
-import com.iweb.panda.mapper.StudentMapperExt;
-import com.iweb.panda.util.JsonUtil;
+import com.panda.iweb.entity.Student;
+import com.panda.iweb.mapper.CourseMapperExt;
+import com.panda.iweb.mapper.StudentMapperExt;
+import com.panda.iweb.util.JsonUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
