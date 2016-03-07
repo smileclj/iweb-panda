@@ -63,5 +63,6 @@ public class JsonUtil {
             logger.error("将字符串:{}反序列化为JSONArray出错:{}", text, e);
             throw new RuntimeException(e);
         }
+        
     }
 }
