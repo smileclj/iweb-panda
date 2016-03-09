@@ -3,8 +3,8 @@
 <generatorConfiguration>
 	<classPathEntry location="C:\work_soft\maven_jar\respository\mysql\mysql-connector-java\5.1.28\mysql-connector-java-5.1.28.jar" />
 	<context id="context1">
-	 	<plugin type="com.iweb.panda.util.mybatis.MapperExtGenerateplugin" />   
-	 	<plugin type="com.iweb.panda.util.mybatis.PageHelperPlugin" />   
+	 	<plugin type="com.panda.iweb.util.mybatis.MapperExtGenerateplugin" />   
+	 	<plugin type="com.panda.iweb.util.mybatis.PageHelperPlugin" />   
 	 
 		<commentGenerator>
 			  <property name="suppressAllComments" value="true"/>  
@@ -15,20 +15,20 @@
 			password="123456">
 		</jdbcConnection>
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="com.iweb.panda.entity"
+		<javaModelGenerator targetPackage="com.panda.iweb.entity"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<!-- 生成映射文件的包名和位置 -->
-		<sqlMapGenerator targetPackage="com.iweb.panda.mapper.xml"
+		<sqlMapGenerator targetPackage="com.panda.iweb.mapper.xml"
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 生成DAO的包名和位置 -->
-		<javaClientGenerator targetPackage="com.iweb.panda.mapper"
+		<javaClientGenerator targetPackage="com.panda.iweb.mapper"
 			targetProject="src/main/java" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.iweb.panda.mapper.StudentMapperExt" >
-  <resultMap id="BaseResultMap" type="com.iweb.panda.entity.Student" >
+<mapper namespace="com.panda.iweb.mapper.StudentMapperExt" >
+  <resultMap id="BaseResultMap" type="com.panda.iweb.entity.Student" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="TINYINT" />
@@ -39,7 +39,7 @@
   <sql id="Base_Column_List" >
     id, name, sex, create_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iweb.panda.entity.StudentExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.panda.iweb.entity.StudentExample" >
     select
     <if test="distinct" >
       distinct
@@ -66,7 +66,7 @@
     delete from student
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.iweb.panda.entity.Student" >
+  <insert id="insert" parameterType="com.panda.iweb.entity.Student" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -75,7 +75,7 @@
     values (#{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.iweb.panda.entity.Student" >
+  <insert id="insertSelective" parameterType="com.panda.iweb.entity.Student" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -103,13 +103,13 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.iweb.panda.entity.StudentExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.panda.iweb.entity.StudentExample" resultType="java.lang.Integer" >
     select count(*) from student
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="com.iweb.panda.entity.Student" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.panda.iweb.entity.Student" >
     update student
     <set >
       <if test="name != null" >
@@ -124,7 +124,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.iweb.panda.entity.Student" >
+  <update id="updateByPrimaryKey" parameterType="com.panda.iweb.entity.Student" >
     update student
     set name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=TINYINT},

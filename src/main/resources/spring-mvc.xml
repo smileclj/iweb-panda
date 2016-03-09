@@ -15,8 +15,8 @@
 						   http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 自动扫描且只扫描@Controller -->
-	<context:component-scan base-package="com.iweb.panda.controller" />
-	<context:component-scan base-package="com.iweb.panda.web" />
+	<context:component-scan base-package="com.panda.iweb.controller" />
+	<context:component-scan base-package="com.panda.iweb.web" />
 	<aop:aspectj-autoproxy/>
 	
 	<bean id="contentNegotiationManager"
@@ -42,17 +42,17 @@
 	<mvc:annotation-driven
 		content-negotiation-manager="contentNegotiationManager">
 		<mvc:message-converters>
-			<bean class="com.iweb.panda.web.PandaJackSonHttpMessageConverter"></bean>
+			<bean class="com.panda.iweb.web.PandaJackSonHttpMessageConverter"></bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
 	<!--全局异常统一处理 -->
-	<bean class="com.iweb.panda.web.interceptors.PandaExceptionInterceptor"></bean>
+	<bean class="com.panda.iweb.web.interceptors.PandaExceptionInterceptor"></bean>
 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="com.iweb.panda.web.interceptors.PandaInterceptor"></bean>
+			<bean class="com.panda.iweb.web.interceptors.PandaInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

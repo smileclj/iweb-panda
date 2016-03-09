@@ -18,7 +18,7 @@ public class MethodMonitorAop {
 
 	private static final Logger logger = LoggerFactory.getLogger(MethodMonitorAop.class);
 
-	@Pointcut("execution(* com.iweb.panda.service.impl.*.*(..))")
+	@Pointcut("execution(* com.panda.iweb.service.impl.*.*(..))")
 	public void controller() {
 	}
 

@@ -9,7 +9,7 @@
 		lazy-init="false"> <property name="triggers"> <list> <ref bean="testTrigger1" 
 		/> <ref bean="testTrigger2" /> </list> </property> </bean> -->
 
-	<bean id="testJob1" class="com.iweb.panda.task.TestJob1" />
+	<bean id="testJob1" class="com.panda.iweb.task.TestJob1" />
 	<bean id="testJobDetail1"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="testJob1" />
@@ -22,7 +22,7 @@
 		<property name="cronExpression" value="*/5 * * * * ?" />
 	</bean>
 
-	<bean id="testJob2" class="com.iweb.panda.task.TestJob2"></bean>
+	<bean id="testJob2" class="com.panda.iweb.task.TestJob2"></bean>
 	<bean id="testJobDetail2"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="testJob2" />

@@ -12,8 +12,8 @@
                            http://www.springframework.org/schema/tx/spring-tx.xsd
                            http://www.springframework.org/schema/aop
 						   http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <context:component-scan base-package="com.iweb.panda.mapper" />
-    <context:component-scan base-package="com.iweb.panda.service.impl" />
+    <context:component-scan base-package="com.panda.iweb.mapper" />
+    <context:component-scan base-package="com.panda.iweb.service.impl" />
     <!--数据源-->
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -55,7 +55,7 @@
     </tx:advice>
     
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.iweb.panda.service.impl.*.*(..))" />
+        <aop:pointcut id="serviceMethods" expression="execution(* com.panda.iweb.service.impl.*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
     </aop:config>
 
@@ -64,7 +64,7 @@
         <!--configLocation属性指定mybatis的核心配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--mapperLocations指定映射文件路径 -->
-        <property name="mapperLocations" value="classpath:com/iweb/panda/mapper/xml/*.xml" />
+        <property name="mapperLocations" value="classpath:com/panda/iweb/mapper/xml/*.xml" />
     </bean>
     
      <!--scan for mappers and let them be autowired -->
@@ -72,6 +72,6 @@
     	<!-- 只查找Ext -->
     	<property name="annotationClass" value="org.springframework.stereotype.Repository" />
          <!--Mapper接口所在包名，Spring会自动查找其下的Mapper -->
-        <property name="basePackage" value="com.iweb.panda.mapper"/>
+        <property name="basePackage" value="com.panda.iweb.mapper"/>
     </bean>
 </beans>

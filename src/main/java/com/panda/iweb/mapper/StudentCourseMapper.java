@@ -2,7 +2,6 @@ package com.panda.iweb.mapper;
 
 import com.panda.iweb.entity.StudentCourse;
 import com.panda.iweb.entity.StudentCourseExample;
-
 import java.util.List;
 
 public interface StudentCourseMapper {
