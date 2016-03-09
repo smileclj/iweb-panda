@@ -19,6 +19,10 @@ public class MethodMonitorAop {
 	private static final Logger logger = LoggerFactory.getLogger(MethodMonitorAop.class);
 
 	@Pointcut("execution(* com.panda.iweb.service.impl.*.*(..))")
+	public void service() {
+	}
+	
+	@Pointcut("execution(* com.panda.iweb.controller.*.*(..))")
 	public void controller() {
 	}
 
@@ -42,7 +46,7 @@ public class MethodMonitorAop {
 		logger.info("method execute afterThrowing");
 	}
 
-	@Around("controller()")
+	@Around("controller() || service()")
 	public Object around(ProceedingJoinPoint p) throws Throwable {
 		long start = System.currentTimeMillis();
 		Object r = p.proceed();
