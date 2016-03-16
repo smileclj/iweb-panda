@@ -26,7 +26,7 @@ public class TestServiceUnit {
 	@Test
 	public void addStudentAndCourse() {
 		Student student = new Student();
-		student.setName("小贵");
+		student.setName("小嗯");
 		student.setSex(1);
 		student.setCreateTime(new Date());
 

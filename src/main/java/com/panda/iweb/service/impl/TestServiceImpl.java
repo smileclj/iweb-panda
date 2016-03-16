@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
 import com.panda.iweb.entity.Course;
@@ -20,6 +21,8 @@ public class TestServiceImpl implements TestService {
 	private StudentMapperExt studentMapperExt;
 	@Resource
 	private CourseMapperExt courseMapperExt;
+	@Resource
+	private ThreadPoolTaskExecutor pool;
 
 	@Override
 	public void addStudent(Student student) {
@@ -34,10 +37,15 @@ public class TestServiceImpl implements TestService {
 	@Override
 	public void addStudentAndCourse(Student student, Course course, boolean throwException) {
 		addStudent(student);
-		if (throwException) {
-			throw new RuntimeException("addStudentAndCourse exception");
-		}
-		addCourse(course);
+		pool.execute(new Runnable() {
+			@Override
+			public void run() {
+				addCourse(course);
+				if (throwException) {
+					throw new RuntimeException("addStudentAndCourse exception");
+				}
+			}
+		});
 	}
 
 	@Override
