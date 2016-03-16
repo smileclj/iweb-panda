@@ -28,7 +28,7 @@
      	<Logger name="com.iweb.panda.mapper" level="DEBUG" />
         <Logger name="org.mybatis" level="DEBUG" />
         
-        <Root level="INFO">
+        <Root level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="RollingFile"/>
         </Root>

@@ -26,12 +26,12 @@ public class TestServiceUnit {
 	@Test
 	public void addStudentAndCourse() {
 		Student student = new Student();
-		student.setName("小嗯");
+		student.setName("小II");
 		student.setSex(1);
 		student.setCreateTime(new Date());
 
 		Course course = new Course();
-		course.setName("数学");
+		course.setName("舞蹈");
 		course.setCreateTime(new Date());
 
 		testService.addStudentAndCourse(student, course, true);
@@ -42,5 +42,10 @@ public class TestServiceUnit {
 	@Test
 	public void getStudent() {
 		testService.getStudentById(1);
+	}
+	
+	@Test
+	public void getStudentByIdWithSync(){
+		testService.testThreadXLock();
 	}
 }

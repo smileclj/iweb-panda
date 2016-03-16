@@ -23,6 +23,8 @@ public class TestServiceImpl implements TestService {
 	private CourseMapperExt courseMapperExt;
 	@Resource
 	private ThreadPoolTaskExecutor pool;
+	@Resource
+	private TestService testService;
 
 	@Override
 	public void addStudent(Student student) {
@@ -35,17 +37,27 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
+	public void addCourse(Course course, boolean throwException) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
 	public void addStudentAndCourse(Student student, Course course, boolean throwException) {
 		addStudent(student);
-		pool.execute(new Runnable() {
-			@Override
-			public void run() {
-				addCourse(course);
-				if (throwException) {
-					throw new RuntimeException("addStudentAndCourse exception");
-				}
-			}
-		});
+		// pool.execute(new Runnable() {
+		// @Override
+		// public void run() {
+		// addCourse(course);
+		// if (throwException) {
+		// throw new RuntimeException("addStudentAndCourse exception");
+		// }
+		// }
+		// });
+		ServiceTask task = new ServiceTask();
+		task.setCourse(course);
+		task.setThrowException(true);
+		pool.execute(task);
 	}
 
 	@Override
@@ -62,4 +74,26 @@ public class TestServiceImpl implements TestService {
 		logger.info("student query:{}", JsonUtil.toJsonString(studentMapperExt.selectByPrimaryKey(id)));
 	}
 
+	@Override
+	public void getStudentByIdWithSync(int id) {
+		logger.info("student query:{}", JsonUtil.toJsonString(studentMapperExt.findStudentByIdWithXLock(id)));
+	}
+
+	@Override
+	public void testThreadXLock() {
+		getStudentByIdWithSync(1);
+		pool.execute(new Runnable() {
+			@Override
+			public void run() {
+				getStudentByIdWithSync(1);
+				logger.info("sub");
+			}
+		});
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		}
+		logger.info("main");
+
+	}
 }
