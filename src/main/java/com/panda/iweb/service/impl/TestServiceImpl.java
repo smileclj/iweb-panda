@@ -43,21 +43,17 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
-	public void addStudentAndCourse(Student student, Course course, boolean throwException) {
+	public void addStudentAndCourse(Student student, Course course, boolean throwException) throws Exception {
 		addStudent(student);
-		// pool.execute(new Runnable() {
-		// @Override
-		// public void run() {
-		// addCourse(course);
-		// if (throwException) {
-		// throw new RuntimeException("addStudentAndCourse exception");
-		// }
-		// }
-		// });
-		ServiceTask task = new ServiceTask();
-		task.setCourse(course);
-		task.setThrowException(true);
-		pool.execute(task);
+		addCourse(course);
+		if (throwException) {
+			throw new Exception("addStudentAndCourse exception");
+			// throw new RuntimeException("addStudentAndCourse exception");
+		}
+		// ServiceTask task = new ServiceTask();
+		// task.setCourse(course);
+		// task.setThrowException(true);
+		// pool.execute(task);
 	}
 
 	@Override

@@ -26,15 +26,18 @@ public class TestServiceUnit {
 	@Test
 	public void addStudentAndCourse() {
 		Student student = new Student();
-		student.setName("小II");
+		student.setName("小Q");
 		student.setSex(1);
 		student.setCreateTime(new Date());
 
 		Course course = new Course();
-		course.setName("舞蹈");
+		course.setName("养生");
 		course.setCreateTime(new Date());
 
-		testService.addStudentAndCourse(student, course, true);
+		try {
+			testService.addStudentAndCourse(student, course, true);
+		} catch (Exception e) {
+		}
 		logger.info("student,name:{},id:{}", student.getName(), student.getId());
 		logger.info("course,name:{},id:{}", course.getName(), course.getId());
 	}

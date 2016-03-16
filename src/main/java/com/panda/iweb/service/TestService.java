@@ -10,7 +10,7 @@ public interface TestService {
 	
 	void addCourse(Course course,boolean throwException);
 
-	void addStudentAndCourse(Student student, Course course, boolean throwException);
+	void addStudentAndCourse(Student student, Course course, boolean throwException) throws Exception;
 
 	void getAddStudentAndCourse(Student student, Course course, boolean throwException);
 
