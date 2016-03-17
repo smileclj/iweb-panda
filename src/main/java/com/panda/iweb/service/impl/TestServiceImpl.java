@@ -47,8 +47,8 @@ public class TestServiceImpl implements TestService {
 		addStudent(student);
 		addCourse(course);
 		if (throwException) {
-			throw new Exception("addStudentAndCourse exception");
-			// throw new RuntimeException("addStudentAndCourse exception");
+			// throw new Exception("addStudentAndCourse exception");
+			throw new RuntimeException("addStudentAndCourse exception");
 		}
 		// ServiceTask task = new ServiceTask();
 		// task.setCourse(course);
