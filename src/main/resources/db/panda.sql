@@ -74,3 +74,12 @@ CREATE TABLE `student_course` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-03-03 15:41:09
+
+DROP TABLE IF EXISTS `test_date`;
+CREATE TABLE `test_date` (
+  `d4` varchar(256) COLLATE utf8mb4_bin DEFAULT NULL,
+  `d3` datetime DEFAULT NULL,
+  `d2` datetime DEFAULT NULL,
+  `d1` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+

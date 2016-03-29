@@ -161,4 +161,9 @@ public class TestCommonUnit {
 		list.add(3);
 		System.out.println(JsonUtil.toJsonString(list.subList(0, 2)));
 	}
+	
+	@Test
+	public void testDate2(){
+		System.out.println(new Date().getTime());
+	}
 }
