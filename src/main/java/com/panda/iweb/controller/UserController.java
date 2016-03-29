@@ -34,4 +34,9 @@ public class UserController extends BaseController {
 	public void getAndPost(String name) {
 		logger.info("getAndPost:{}", name);
 	}
+	
+	@RequestMapping(value = "/testDate")
+	public void testDate(String name) {
+		logger.info("getAndPost:{}", name);
+	}
 }
