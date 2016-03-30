@@ -24,4 +24,5 @@
 			<bean class="java.util.concurrent.ThreadPoolExecutor$AbortPolicy" />
 		</property>
 	</bean>
+	
 </beans>

@@ -1,5 +1,8 @@
 package com.panda.iweb.service.impl;
 
+import java.util.Date;
+import java.util.concurrent.CountDownLatch;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -25,6 +28,8 @@ public class TestServiceImpl implements TestService {
 	private ThreadPoolTaskExecutor pool;
 	@Resource
 	private TestService testService;
+	@Resource
+	private MyTask myTask;
 
 	@Override
 	public void addStudent(Student student) {
@@ -90,6 +95,44 @@ public class TestServiceImpl implements TestService {
 		} catch (InterruptedException e) {
 		}
 		logger.info("main");
+	}
 
+	@Override
+	public void addLotsOfStudents() {
+		int size = 2;
+		CountDownLatch latch = new CountDownLatch(size);
+		for (int i = 0; i < size; i++) {
+			pool.execute(new Runnable() {
+				@Override
+				public void run() {
+					for (int i = 0; i < 10000; i++) {
+						Student student = new Student();
+						student.setName("小美" + i);
+						student.setSex(1);
+						student.setCreateTime(new Date());
+						studentMapperExt.insertSelective(student);
+					}
+					latch.countDown();
+				}
+			});
+		}
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+		}
+	}
+
+	@Override
+	public void addLotsOfStudents2() {
+		int size = 2;
+		CountDownLatch latch = new CountDownLatch(size);
+		myTask.setLetch(latch);
+		for (int i = 0; i < size; i++) {
+			pool.execute(myTask);
+		}
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+		}
 	}
 }

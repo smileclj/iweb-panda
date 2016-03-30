@@ -19,4 +19,8 @@ public interface TestService {
 	void getStudentByIdWithSync(int id);
 	
 	void testThreadXLock();
+	
+	void addLotsOfStudents();
+	
+	void addLotsOfStudents2();
 }
