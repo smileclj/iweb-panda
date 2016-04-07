@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.X509TrustManager;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -228,6 +226,6 @@ public class TestCommonUnit {
 	@Test
 	public void https() {
 		String url = "https://www.panda.com:8444";
-		System.out.println(NetUtil.securePostByAuth(url, null));
+		System.out.println(HttpUtil.securePostByAuth(url, null));
 	}
 }

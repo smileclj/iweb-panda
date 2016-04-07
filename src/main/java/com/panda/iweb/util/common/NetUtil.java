@@ -198,9 +198,10 @@ public class NetUtil {
 		String result = "";
 		BufferedReader in = null;
 		PrintWriter out = null;
+		InputStream is = null;
 		try {
 			KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType()); // jks
-			InputStream is = NetUtil.class.getResourceAsStream("/security/server.keystore");
+			is = NetUtil.class.getResourceAsStream("/security/server.keystore");
 			String keyPwd = "123456";
 			trustStore.load(is, keyPwd.toCharArray());
 			TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509", "SunJSSE");
@@ -246,6 +247,13 @@ public class NetUtil {
 				try {
 					out.close();
 				} catch (Exception e) {
+					success = false;
+				}
+			}
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
 					success = false;
 				}
 			}
