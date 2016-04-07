@@ -4,10 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.X509TrustManager;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -23,6 +26,8 @@ import com.iweb.panda.entity.RefClass;
 import com.iweb.panda.entity.TestObject;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
+import com.panda.iweb.util.common.HttpUtil;
+import com.panda.iweb.util.common.NetUtil;
 
 public class TestCommonUnit {
 
@@ -169,5 +174,60 @@ public class TestCommonUnit {
 		System.out.println(now.before(now));
 		System.out.println(now.equals(now));
 		System.out.println(now.compareTo(now));
+	}
+
+	@Test
+	public void hashcode() {
+		System.out.println(new Integer(1).hashCode());
+		System.out.println(new Double(1.1).hashCode());
+		System.out.println("a".hashCode());
+		System.out.println("a".hashCode());
+		System.out.println(new Boolean(true).hashCode());
+		System.out.println(new Boolean(false).hashCode());
+	}
+
+	@Test
+	public void jdk1_7() {
+		int a = 100_100;
+		System.out.println(a);
+	}
+
+	@Test
+	public void jdk1_8() {
+		Object[] os = {};
+		Object[] os2 = {};
+		System.out.println(os.getClass().getComponentType());
+
+		Object o = new Object();
+		System.out.println(o.getClass().getComponentType());
+		System.out.println(os);
+	}
+
+	@Test
+	public void equals() {
+		Boolean b1 = new Boolean(true);
+		Boolean b2 = new Boolean(true);
+		System.out.println(b1.equals(b2));
+	}
+
+	@Test
+	public void arrayCopy() {
+		int[] a = new int[] { 1, 2, 3, 4, 5, 6 };
+		int index = 1;
+		int moveNum = a.length - index - 1;
+		System.arraycopy(a, index + 1, a, index, moveNum);
+		System.out.println(Arrays.toString(a));
+	}
+
+	@Test
+	public void http() {
+		String url = "http://www.panda.com:8081";
+		System.out.println(NetUtil.get(url));
+	}
+
+	@Test
+	public void https() {
+		String url = "https://www.panda.com:8444";
+		System.out.println(NetUtil.securePostByAuth(url, null));
 	}
 }
