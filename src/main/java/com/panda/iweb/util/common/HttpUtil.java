@@ -270,7 +270,10 @@ public class HttpUtil {
 					nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 				}
 			}
-			httpclient = HttpClients.createDefault();
+			SSLContext sslcontext = SSLContexts.createSystemDefault();
+			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" }, null,
+					SSLConnectionSocketFactory.getDefaultHostnameVerifier());
+			httpclient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 			HttpPost request = new HttpPost(url);
 			RequestConfig config = RequestConfig.custom().setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT).setSocketTimeout(DEFAULT_READ_TIMEOUT).build();
 			request.setConfig(config);
@@ -281,7 +284,7 @@ public class HttpUtil {
 			while ((line = in.readLine()) != null) {
 				result += line;
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.error("POST请求失败", e);
 		} finally {
 			if (response != null) {
@@ -305,63 +308,6 @@ public class HttpUtil {
 		}
 		return result;
 	}
-
-	// public static String securePostByAuth(String url, Map<String, String>
-	// params) {
-	// String result = "";
-	// BufferedReader in = null;
-	// CloseableHttpResponse response = null;
-	// CloseableHttpClient httpclient = null;
-	// try {
-	// List<NameValuePair> nvps = new ArrayList<>();
-	// if (params != null) {
-	// for (Map.Entry<String, String> entry : params.entrySet()) {
-	// nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-	// }
-	// }
-	// KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType()); //
-	// jks
-	// InputStream is =
-	// NetUtil.class.getResourceAsStream("/security/server.keystore");
-	// String keyPwd = "123456";
-	// trustStore.load(is, keyPwd.toCharArray());
-	// SSLContext sslcontext = httpclient = HttpClients.createDefault();
-	// HttpPost request = new HttpPost(url);
-	// RequestConfig config =
-	// RequestConfig.custom().setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT).setSocketTimeout(DEFAULT_READ_TIMEOUT).build();
-	// request.setConfig(config);
-	// request.setEntity(new UrlEncodedFormEntity(nvps, DEFAULT_ENCODE));
-	// response = httpclient.execute(request);
-	// in = new BufferedReader(new
-	// InputStreamReader(response.getEntity().getContent()));
-	// String line = null;
-	// while ((line = in.readLine()) != null) {
-	// result += line;
-	// }
-	// } catch (IOException e) {
-	// logger.error("POST请求失败", e);
-	// } finally {
-	// if (response != null) {
-	// try {
-	// response.close();
-	// } catch (IOException e) {
-	// }
-	// }
-	// if (httpclient != null) {
-	// try {
-	// httpclient.close();
-	// } catch (IOException e) {
-	// }
-	// }
-	// if (in != null) {
-	// try {
-	// in.close();
-	// } catch (IOException e) {
-	// }
-	// }
-	// }
-	// return result;
-	// }
 
 	public static String securePostByAuth(String url, Map<String, String> params) {
 		String result = "";
