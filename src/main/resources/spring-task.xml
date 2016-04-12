@@ -5,33 +5,47 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!--Scheduler的配置 -->
-	<!-- <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" 
-		lazy-init="false"> <property name="triggers"> <list> <ref bean="testTrigger1" 
-		/> <ref bean="testTrigger2" /> </list> </property> </bean> -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false">
+		<property name="configLocation" value="classpath:quartz.properties" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<property name="triggers">
+			<list>
+				<ref bean="testTrigger2" />
+			</list>
+		</property>
+	</bean>
 
+	<!-- 任务1 -->
 	<bean id="testJob1" class="com.panda.iweb.task.TestJob1" />
 	<bean id="testJobDetail1"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="testJob1" />
-		<property name="targetMethod" value="execute" />
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass"
+			value="com.panda.iweb.common.quartz.PandaQuartzJobBean" />
+		<property name="jobDataMap">
+			<map>
+				<entry key="targetObject" value="testJob1" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
 	</bean>
-
-	<bean id="testTrigger1"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="testJobDetail1" />
-		<property name="cronExpression" value="*/5 * * * * ?" />
-	</bean>
-
-	<bean id="testJob2" class="com.panda.iweb.task.TestJob2"></bean>
-	<bean id="testJobDetail2"
-		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="testJob2" />
-		<property name="targetMethod" value="execute" />
-	</bean>
-
 	<bean id="testTrigger2"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="testJobDetail2" />
-		<property name="cronExpression" value="*/5 * * * * ?" />
+		<property name="jobDetail" ref="testJobDetail1" />
+		<property name="cronExpression" value="*/10 * * * * ?" />
 	</bean>
+
+	<!-- <bean id="testTrigger2"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="testJobDetail1" />
+		<property name="cronExpression" value="*/10 * * * * ?" />
+	</bean> -->
+
+	<!-- 任务2 -->
+	<!-- <bean id="testJob2" class="com.panda.iweb.task.TestJob2"></bean> <bean 
+		id="testJobDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="testJob2" /> <property name="targetMethod" 
+		value="execute" /> </bean> <bean id="testTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> 
+		<property name="jobDetail" ref="testJobDetail2" /> <property name="cronExpression" 
+		value="*/10 * * * * ?" /> </bean> -->
 </beans>
