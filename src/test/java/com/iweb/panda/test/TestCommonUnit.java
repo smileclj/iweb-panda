@@ -1,6 +1,8 @@
 package com.iweb.panda.test;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
 import com.iweb.panda.entity.RefClass;
 import com.iweb.panda.entity.TestObject;
+import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.HttpUtil;
@@ -227,5 +230,26 @@ public class TestCommonUnit {
 	public void https() {
 		String url = "https://www.baidu.com";
 		System.out.println(NetUtil.securePostByAuth(url, null));
+	}
+
+	@Test
+	public void reflect() {
+		try {
+			Class<?> clazz = TestCommonUnit.class.getClassLoader().loadClass("com.panda.iweb.test.reflect.ReflectTest");
+			Method method = clazz.getMethod("getName", new Class[] {});
+			ReflectTest relectTest = new ReflectTest();
+			relectTest.setAge(5);
+			relectTest.setName("小红");
+			Object o = (Object) relectTest;
+			System.out.println(o instanceof ReflectTest);
+			System.out.println(o.getClass());
+			try {
+				System.out.println(method.invoke(o, new Object[] {}));
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			}
+		} catch (ClassNotFoundException e) {
+		} catch (NoSuchMethodException e) {
+		} catch (SecurityException e) {
+		}
 	}
 }

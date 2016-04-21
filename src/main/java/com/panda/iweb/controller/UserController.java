@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +29,19 @@ public class UserController extends BaseController {
 		logger.info("get:{}", name);
 	}
 
-	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public void post(String name) {
-		logger.info("post:{}", name);
+	@RequestMapping(value = "/postCommon1")
+	public void postCommon1(String id, String name) {
+		logger.info("id:{},name:{}", id, name);
+	}
+
+	@RequestMapping(value = "/postCommon2")
+	public void postCommon2(@RequestBody String str) {
+		logger.info("str:{}", str);
+	}
+
+	@RequestMapping(value = "/postJson")
+	public void postJson(@RequestBody String str) {
+		logger.info("str:{}", str);
 	}
 
 	@RequestMapping(value = "/getAndPost")

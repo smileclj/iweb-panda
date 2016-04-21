@@ -300,13 +300,10 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>net.sf.oval</groupId>
-			<artifactId>oval</artifactId>
-			<version>1.85</version>
-		</dependency> -->
-	<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> 
-		<version>5.3.0.Alpha1</version> </dependency> -->
+		<!-- <dependency> <groupId>net.sf.oval</groupId> <artifactId>oval</artifactId> 
+			<version>1.85</version> </dependency> -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> 
+			<version>5.3.0.Alpha1</version> </dependency> -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -351,6 +348,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
+					<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->
 					<webResources>
 						<resource>
 							<directory>src/main/resources/${package.environment}</directory>
