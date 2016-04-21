@@ -225,7 +225,7 @@ public class TestCommonUnit {
 
 	@Test
 	public void https() {
-		String url = "https://www.panda.com:8444";
-		System.out.println(HttpUtil.securePostByNoAuth(url, null));
+		String url = "https://www.baidu.com";
+		System.out.println(NetUtil.securePostByAuth(url, null));
 	}
 }
