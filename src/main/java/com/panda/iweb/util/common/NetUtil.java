@@ -273,7 +273,7 @@ public class NetUtil {
 	}
 
 	public static String post(String url, Map<String, Object> params) {
-		return post(url, _transfer(params), DEFAULT_ENCODE, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
+		return post(url, join(params), DEFAULT_ENCODE, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
 	}
 
 	/**
@@ -446,7 +446,7 @@ public class NetUtil {
 	 * @param params
 	 * @return
 	 */
-	private static String _transfer(Map<String, Object> params) {
+	public static String join(Map<String, Object> params) {
 		StringBuilder joinParams = new StringBuilder();
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
 			joinParams.append("&").append(entry.getKey()).append("=" + entry.getValue());
@@ -513,7 +513,7 @@ public class NetUtil {
 	}
 
 	public static String get(String url, Map<String, Object> params) {
-		return get(url, _transfer(params), DEFAULT_ENCODE, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
+		return get(url, join(params), DEFAULT_ENCODE, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
 	}
 
 	/**

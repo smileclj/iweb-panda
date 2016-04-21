@@ -7,11 +7,11 @@
 	<!--Scheduler的配置 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
 		lazy-init="false">
-		<property name="configLocation" value="classpath:quartz.properties" />
-		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		<!-- <property name="configLocation" value="classpath:quartz.properties" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" /> -->
 		<property name="triggers">
 			<list>
-				<ref bean="testTrigger2" />
+				<!-- <ref bean="testTrigger2" /> -->
 			</list>
 		</property>
 	</bean>
