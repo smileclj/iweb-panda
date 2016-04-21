@@ -35,7 +35,8 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/postCommon2")
-	public void postCommon2(@RequestBody String str) {
+	public void postCommon2(@RequestBody String str, String id, String name) {
+		logger.info("id:{},name:{}", id, name);
 		logger.info("str:{}", str);
 	}
 
