@@ -1,5 +1,6 @@
 package com.panda.iweb.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,8 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public void get(String name) {
-		logger.info("get:{}", name);
+	public void get(String name, BigDecimal decimal) {
+		logger.info("get,name:{},decimal:{}", name, decimal);
 	}
 
 	@RequestMapping(value = "/postCommon1")
