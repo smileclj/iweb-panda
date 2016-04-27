@@ -257,7 +257,6 @@ public class HttpUtil {
 		}
 		return result;
 	}
-	
 
 	public static String securePostByNoAuth(String url, Map<String, String> params) {
 		String result = "";
@@ -501,7 +500,6 @@ public class HttpUtil {
 	 * @return
 	 */
 	public static void downloadFile(String url, Map<String, String> params, File file) {
-		// String result = "";
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
 		CloseableHttpResponse response = null;
