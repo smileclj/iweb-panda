@@ -23,13 +23,13 @@ public class UserController extends BaseController {
 	public JsonpResult getUserInfo(Integer a, Double b, String c, HttpServletRequest req) {
 		logger.info("getUserInfo");
 		logger.info("servletPath:{}", req.getServletPath());
-		logger.info("realpath1{}",req.getServletContext().getRealPath("/"));
-		logger.info("realpath2{}",req.getServletContext().getRealPath(""));
+		logger.info("realpath1{}", req.getServletContext().getRealPath("/"));
+		logger.info("realpath2{}", req.getServletContext().getRealPath(""));
 		return result(req, new Result(ErrorCode.SUCCESS));
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public void get(String name, BigDecimal decimal) {
+	public void get(@RequestBody String body, String name, BigDecimal decimal) {
 		logger.info("get,name:{},decimal:{}", name, decimal);
 	}
 
