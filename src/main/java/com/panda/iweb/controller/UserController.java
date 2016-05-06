@@ -29,7 +29,7 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public void get(@RequestBody String body, String name, BigDecimal decimal) {
+	public void get(String name, BigDecimal decimal) {
 		logger.info("get,name:{},decimal:{}", name, decimal);
 	}
 
