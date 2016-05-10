@@ -22,6 +22,15 @@ public class FileTest {
 		System.out.println("parent:" + file.getParent());
 		System.out.println("path:" + file.getPath());
 		System.out.println("total:" + file.getTotalSpace());
+
+		System.out.println("=============");
+
+		String folder = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separatorChar) + 1);
+		System.out.println("folder:" + folder);
+		String suffix = file.getName().substring(file.getName().lastIndexOf("."));
+		System.out.println("suffix:" + suffix);
+		String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
+		System.out.println("fileName:" + fileName);
 	}
 
 	@Test

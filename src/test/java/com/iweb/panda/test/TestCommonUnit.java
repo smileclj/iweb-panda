@@ -9,8 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -27,7 +31,6 @@ import com.iweb.panda.entity.TestObject;
 import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
-import com.panda.iweb.util.common.HttpUtil;
 import com.panda.iweb.util.common.NetUtil;
 
 public class TestCommonUnit {
@@ -261,6 +264,47 @@ public class TestCommonUnit {
 		list.add(2);
 		list.add(1);
 		list.add(1);
-//		IntegerCollections.max(list);
+		// IntegerCollections.max(list);
+	}
+
+	@Test
+	public void longT() {
+		System.out.println(Long.parseLong("01"));
+	}
+
+	@Test
+	public void toS() {
+		List<String> list = new ArrayList<String>();
+		list.add("a");
+		list.add("b");
+		String r = list.toString().substring(1, list.toString().length() - 1);
+		String[] ss = r.split(",");
+		System.out.println(Arrays.toString(ss));
+		System.out.println(r);
+
+		String[] s = new String[] { "d", "f" };
+		System.out.println(Arrays.toString(s));
+	}
+
+	@Test
+	public void map() {
+//		Map<String, String> map = new IdentityHashMap<String, String>();
+//		map.put(new String("1"), "a");
+//		map.put(new String("1"), "b");
+		// for (Map.Entry<String, String> entry : map.entrySet()) {
+		// System.out.println(entry.getKey());
+		// System.out.println(entry.getValue());
+		// }
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("1", "a");
+		map.put("2", "b");
+
+		Set<Map.Entry<String, String>> allSet = map.entrySet();
+		Iterator<Map.Entry<String, String>> it = allSet.iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, String> me = it.next();
+			System.out.println(me.getKey() + " --> " + me.getValue());
+		}
 	}
 }
