@@ -53,7 +53,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/user/getUserInfo.htm" />
 			<bean class="com.panda.iweb.web.interceptors.PandaInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
