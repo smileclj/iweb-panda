@@ -23,8 +23,8 @@ public class UserController extends BaseController {
 	public JsonpResult getUserInfo(Integer a, Double b, String c, HttpServletRequest req) {
 		logger.info("getUserInfo");
 		logger.info("servletPath:{}", req.getServletPath());
-		logger.info("realpath1{}",req.getServletContext().getRealPath("/"));
-		logger.info("realpath2{}",req.getServletContext().getRealPath(""));
+		logger.info("realpath1{}", req.getServletContext().getRealPath("/"));
+		logger.info("realpath2{}", req.getServletContext().getRealPath(""));
 		return result(req, new Result(ErrorCode.SUCCESS));
 	}
 
