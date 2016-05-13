@@ -26,6 +26,7 @@ public class PandaInterceptor implements HandlerInterceptor {
         // 解决ajax跨域问题
         // response.addHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         logger.info("preHandle");
+        System.out.println(request.getSession().getId());
         return true;
     }
 

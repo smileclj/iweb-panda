@@ -285,6 +285,12 @@ public class TestCommonUnit {
 		String[] s = new String[] { "d", "f" };
 		System.out.println(Arrays.toString(s));
 	}
+	
+	@Test
+	public void booleant(){
+		System.out.println(Boolean.valueOf("1"));
+		System.out.println(Boolean.valueOf("true"));
+	}
 
 	@Test
 	public void map() {
