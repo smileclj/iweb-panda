@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -285,24 +284,24 @@ public class TestCommonUnit {
 		String[] s = new String[] { "d", "f" };
 		System.out.println(Arrays.toString(s));
 	}
-	
+
 	@Test
-	public void booleant(){
+	public void booleant() {
 		System.out.println(Boolean.valueOf("1"));
 		System.out.println(Boolean.valueOf("true"));
 	}
 
 	@Test
 	public void map() {
-//		Map<String, String> map = new IdentityHashMap<String, String>();
-//		map.put(new String("1"), "a");
-//		map.put(new String("1"), "b");
+		// Map<String, String> map = new IdentityHashMap<String, String>();
+		// map.put(new String("1"), "a");
+		// map.put(new String("1"), "b");
 		// for (Map.Entry<String, String> entry : map.entrySet()) {
 		// System.out.println(entry.getKey());
 		// System.out.println(entry.getValue());
 		// }
-		
-		Map<String,String> map = new HashMap<String, String>();
+
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("1", "a");
 		map.put("2", "b");
 
@@ -312,5 +311,26 @@ public class TestCommonUnit {
 			Map.Entry<String, String> me = it.next();
 			System.out.println(me.getKey() + " --> " + me.getValue());
 		}
+	}
+
+	public static String removeParams(String url, String[] params) {
+		String reg = null;
+		StringBuffer ps = new StringBuffer();
+		ps.append("(");
+		for (int i = 0; i < params.length; i++) {
+			ps.append(params[i]).append("|");
+		}
+		ps.deleteCharAt(ps.length() - 1);
+		ps.append(")");
+		reg = "(?<=[\\?&])" + ps.toString() + "=[^&]*&?";
+		url = url.replaceAll(reg, "");
+		url = url.replaceAll("(\\?|&+)$", "");
+		return url;
+	}
+	
+	@Test
+	public void testUrl(){
+		String url = "http://www.baidu.com?a=1&b=2&a=1&c=4";
+		System.out.println(removeParams(url,new String[]{"a"}));
 	}
 }
