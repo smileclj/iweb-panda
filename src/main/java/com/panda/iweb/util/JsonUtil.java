@@ -1,6 +1,7 @@
 package com.panda.iweb.util;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
-	private final static ObjectMapper objectMapper = new ObjectMapper();
+	public final static ObjectMapper objectMapper = new ObjectMapper();
 
 	public static String toJsonString(Object o) {
 		try {
@@ -53,22 +54,11 @@ public class JsonUtil {
 			throw e;
 		}
 	}
-	//
-	// public static JSONObject parseObject(String text) {
-	// try {
-	// return JSON.parseObject(text);
-	// } catch (JSONException e) {
-	// logger.error("将字符串:{}反序列化为JSONObject出错:{}", text, e);
-	// throw new RuntimeException(e);
-	// }
-	// }
-	//
-	// public static JSONArray parseArray(String text) {
-	// try {
-	// return JSON.parseArray(text);
-	// } catch (JSONException e) {
-	// logger.error("将字符串:{}反序列化为JSONArray出错:{}", text, e);
-	// throw new RuntimeException(e);
-	// }
-	// }
+
+	public static void main(String[] args) {
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("a", "a");
+		m.put("b", "b");
+		// JsonUtil.toJsonString(m)
+	}
 }
