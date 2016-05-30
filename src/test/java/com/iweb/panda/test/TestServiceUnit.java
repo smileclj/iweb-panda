@@ -31,12 +31,14 @@ public class TestServiceUnit {
 		student.setCreateTime(new Date());
 
 		Course course = new Course();
-		course.setName("养生");
+		course.setName("养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生养生1");
 		course.setCreateTime(new Date());
 
 		try {
 			testService.addStudentAndCourse(student, course, true);
+			// testService.addStudent(student, true);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		logger.info("student,name:{},id:{}", student.getName(), student.getId());
 		logger.info("course,name:{},id:{}", course.getName(), course.getId());
@@ -73,7 +75,7 @@ public class TestServiceUnit {
 		long end = System.currentTimeMillis();
 		System.out.println("耗时:" + (end - start) + "ms");
 	}
-	
+
 	@Test
 	public void addLotsOfStudents2() {
 		long start = System.currentTimeMillis();

@@ -37,28 +37,35 @@ public class TestServiceImpl implements TestService {
 	}
 
 	@Override
+	public void addStudent(Student student, boolean throwException) {
+		studentMapperExt.insertSelective(student);
+		if (throwException) {
+			throw new RuntimeException("exception");
+		}
+
+	}
+
+	@Override
 	public void addCourse(Course course) {
 		courseMapperExt.insertSelective(course);
 	}
 
 	@Override
 	public void addCourse(Course course, boolean throwException) {
-		// TODO Auto-generated method stub
-
+		courseMapperExt.insertSelective(course);
+		if (throwException) {
+			throw new RuntimeException("exception");
+		}
 	}
 
 	@Override
-	public void addStudentAndCourse(Student student, Course course, boolean throwException) throws Exception {
+	public void addStudentAndCourse(Student student, Course course, boolean throwException) {
 		addStudent(student);
-		addCourse(course);
-		if (throwException) {
-			// throw new Exception("addStudentAndCourse exception");
-			throw new RuntimeException("addStudentAndCourse exception");
+		try {
+			addCourse(course);
+		} catch (Exception e) {
+			System.out.println("捕到异常");
 		}
-		// ServiceTask task = new ServiceTask();
-		// task.setCourse(course);
-		// task.setThrowException(true);
-		// pool.execute(task);
 	}
 
 	@Override

@@ -31,6 +31,7 @@ import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
+import com.wana.util.JSONUtil;
 
 public class TestCommonUnit {
 
@@ -327,10 +328,35 @@ public class TestCommonUnit {
 		url = url.replaceAll("(\\?|&+)$", "");
 		return url;
 	}
+
+	@Test
+	public void testUrl() {
+		String url = "http://www.baidu.com?a=1&b=2&a=1&c=4";
+		System.out.println(removeParams(url, new String[] { "a" }));
+	}
+
+	@Test
+	@SuppressWarnings("all")
+	public void jsonlib() {
+		String jsonStr = "{\"a\":1}";
+		net.sf.json.JSONObject jsonObj = net.sf.json.JSONObject.fromObject(jsonStr);
+		// DateUtil.now(p, a)
+		JSONObject j1 = JSON.parseObject(jsonStr);
+	}
 	
 	@Test
-	public void testUrl(){
-		String url = "http://www.baidu.com?a=1&b=2&a=1&c=4";
-		System.out.println(removeParams(url,new String[]{"a"}));
+	@SuppressWarnings("all")
+	public void jsonutil() throws Exception {
+		String s1 = "{\"a\":1}";
+		String s2 = "[{\"a\":1}]";
+		Map<String, Object> m1 = JSONUtil.getMapFromJson(s1, String.class, Object.class);
+		System.out.println(m1.get("a"));
+		Map<String, Object> m2 = JSONUtil.json2Map(s1);
+		System.out.println(m2.get("a"));
+		List<Map> l1 = JSONUtil.getListFromJson(s2, Map.class);
+		Map<String,Object> lm1 = l1.get(0);
+		System.out.println(lm1.get("a"));
+		List<Map> l2 = JSONUtil.json2List(s2, Map.class);
+		System.out.println(l2.get(0).get("a"));
 	}
 }
