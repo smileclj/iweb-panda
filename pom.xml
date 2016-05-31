@@ -329,7 +329,7 @@
 		<dependency>
 			<groupId>com.wana.commons</groupId>
 			<artifactId>com.wana.util</artifactId>
-			<version>0.1.10-SNAPSHOT</version>
+			<version>0.1.13-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>

@@ -1,5 +1,6 @@
 package com.iweb.panda.test;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,11 +22,13 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.CaseFormat;
 import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
 import com.iweb.panda.entity.RefClass;
+import com.iweb.panda.entity.Student;
 import com.iweb.panda.entity.TestObject;
 import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
@@ -343,20 +346,34 @@ public class TestCommonUnit {
 		// DateUtil.now(p, a)
 		JSONObject j1 = JSON.parseObject(jsonStr);
 	}
-	
+
 	@Test
 	@SuppressWarnings("all")
 	public void jsonutil() throws Exception {
-		String s1 = "{\"a\":1}";
-		String s2 = "[{\"a\":1}]";
+		String s1 = "{\"a\":[{\"b\":[{\"c\":3}]}]}";
+		String s2 = "[{\"a\":[{\"b\":2}]}]";
 		Map<String, Object> m1 = JSONUtil.getMapFromJson(s1, String.class, Object.class);
-		System.out.println(m1.get("a"));
-		Map<String, Object> m2 = JSONUtil.json2Map(s1);
+		System.out.println(((Map) ((ArrayList) m1.get("a")).get(0)).get("b"));
+		Map<String, Object> m2 = JSONUtil.getJson2Map(s1);
 		System.out.println(m2.get("a"));
 		List<Map> l1 = JSONUtil.getListFromJson(s2, Map.class);
-		Map<String,Object> lm1 = l1.get(0);
+		Map<String, Object> lm1 = l1.get(0);
 		System.out.println(lm1.get("a"));
-		List<Map> l2 = JSONUtil.json2List(s2, Map.class);
+		List<Map> l2 = JSONUtil.getJson2List(s2, Map.class);
 		System.out.println(l2.get(0).get("a"));
+	}
+
+	@Test
+	@SuppressWarnings("all")
+	public void jsonutil2() {
+		String str = "[{\"id\":1,\"name\":\"小明\"}]";
+		List<Map> students1 = JsonUtil.parseArray(str, Map.class);
+
+		List<Student> students2 = null;
+		try {
+			students2 = JsonUtil.objectMapper.readValue(str, new TypeReference<List<Student>>() {
+			});
+		} catch (IOException e) {
+		}
 	}
 }

@@ -1,6 +1,7 @@
 package com.panda.iweb.util;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class JsonUtil {
 
@@ -37,12 +39,16 @@ public class JsonUtil {
 
 	public static <T> List<T> parseArray(String text, Class<T> clazz) {
 		try {
-			return objectMapper.readValue(text, new TypeReference<List<T>>() {
-			});
+			return objectMapper.readValue(text, getCollectionType(List.class, clazz));
 		} catch (IOException e) {
 			logger.error("将字符串:{}反序列化为list出错:{}", text, e);
 			throw new RuntimeException(e);
 		}
+	}
+
+	@SuppressWarnings("all")
+	private static CollectionType getCollectionType(Class<? extends Collection> collectionClass, Class<?> elementClass) {
+		return objectMapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);
 	}
 
 	public static <K, V> Map<K, V> parseMap(String text, Class<K> k, Class<V> v) throws Exception {
