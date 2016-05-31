@@ -38,6 +38,7 @@ public class TestDaoUnit {
 
 	@Test
 	public void getStudent() {
-		logger.info(JsonUtil.toJsonString(studentMapperExt.selectByPrimaryKey(1)));
+		Student student = studentMapperExt.findStudentById(1);
+		logger.info(JsonUtil.toJsonString(student));
 	}
 }

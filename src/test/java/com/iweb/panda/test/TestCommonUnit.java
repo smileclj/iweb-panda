@@ -34,7 +34,6 @@ import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
-import com.wana.util.JSONUtil;
 
 public class TestCommonUnit {
 
@@ -347,21 +346,22 @@ public class TestCommonUnit {
 		JSONObject j1 = JSON.parseObject(jsonStr);
 	}
 
-	@Test
-	@SuppressWarnings("all")
-	public void jsonutil() throws Exception {
-		String s1 = "{\"a\":[{\"b\":[{\"c\":3}]}]}";
-		String s2 = "[{\"a\":[{\"b\":2}]}]";
-		Map<String, Object> m1 = JSONUtil.getMapFromJson(s1, String.class, Object.class);
-		System.out.println(((Map) ((ArrayList) m1.get("a")).get(0)).get("b"));
-		Map<String, Object> m2 = JSONUtil.getJson2Map(s1);
-		System.out.println(m2.get("a"));
-		List<Map> l1 = JSONUtil.getListFromJson(s2, Map.class);
-		Map<String, Object> lm1 = l1.get(0);
-		System.out.println(lm1.get("a"));
-		List<Map> l2 = JSONUtil.getJson2List(s2, Map.class);
-		System.out.println(l2.get(0).get("a"));
-	}
+	// @Test
+	// @SuppressWarnings("all")
+	// public void jsonutil() throws Exception {
+	// String s1 = "{\"a\":[{\"b\":[{\"c\":3}]}]}";
+	// String s2 = "[{\"a\":[{\"b\":2}]}]";
+	// Map<String, Object> m1 = JSONUtil.getMapFromJson(s1, String.class,
+	// Object.class);
+	// System.out.println(((Map) ((ArrayList) m1.get("a")).get(0)).get("b"));
+	// Map<String, Object> m2 = JSONUtil.getJson2Map(s1);
+	// System.out.println(m2.get("a"));
+	// List<Map> l1 = JSONUtil.getListFromJson(s2, Map.class);
+	// Map<String, Object> lm1 = l1.get(0);
+	// System.out.println(lm1.get("a"));
+	// List<Map> l2 = JSONUtil.getJson2List(s2, Map.class);
+	// System.out.println(l2.get(0).get("a"));
+	// }
 
 	@Test
 	@SuppressWarnings("all")
