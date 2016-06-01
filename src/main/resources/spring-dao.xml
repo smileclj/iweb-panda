@@ -60,7 +60,7 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
 	</aop:config>
 
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactory" class="com.panda.iweb.common.ext.SqlSessionFactoryBeanExt">
 		<property name="dataSource" ref="dataSource" />
 		<!--configLocation属性指定mybatis的核心配置文件 -->
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
