@@ -4,4 +4,8 @@
 	<select id="findStudentByIdWithXLock" resultMap="BaseResultMap"> 
 		select * from student where id = #{id} for update
 	</select>
+	
+	<select id="findStudentById" resultMap="BaseResultMap"> 
+		select id,sex,create_time,address from student where id = #{id}
+	</select>
 </mapper>
