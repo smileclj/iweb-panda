@@ -8,12 +8,13 @@
                             http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<context:property-placeholder
-		location="classpath:rabbitmq.properties,classpath:redis.properties,classpath:jdbc.properties"
-		system-properties-mode="OVERRIDE" />
+		location="classpath:rabbitmq.properties,classpath:redis.properties,classpath:jdbc.properties"/>
 
 	<context:component-scan base-package="com.panda.iweb.util" />
 	<context:component-scan base-package="com.panda.iweb.test" />
 	<import resource="spring-*.xml" />
+	
+	<import resource="dubbo-*.xml"/>
 
 	<bean id="pool"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
