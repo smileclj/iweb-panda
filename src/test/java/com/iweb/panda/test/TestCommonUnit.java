@@ -28,6 +28,7 @@ import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
 import com.iweb.panda.entity.RefClass;
+import com.iweb.panda.entity.Result;
 import com.iweb.panda.entity.Student;
 import com.iweb.panda.entity.TestObject;
 import com.panda.iweb.test.reflect.ReflectTest;
@@ -375,5 +376,18 @@ public class TestCommonUnit {
 			});
 		} catch (IOException e) {
 		}
+	}
+
+	@Test
+	@SuppressWarnings("all")
+	public void jsonutil3() {
+		Result r = new Result();
+		r.setId(1);
+		System.out.println(JsonUtil.toJsonString(r));
+		String str = "{\"id\":1,\"student\":null}";
+		Result r2 = JsonUtil.parseObject(str, Result.class);
+		
+		String str2 = "{\"id\":1}";
+		Result r3 = JsonUtil.parseObject(str2, Result.class);
 	}
 }
