@@ -14,7 +14,7 @@
 	<context:component-scan base-package="com.panda.iweb.test" />
 	<import resource="spring-*.xml" />
 	
-	<import resource="dubbo-*.xml"/>
+	<!-- <import resource="dubbo-*.xml"/> -->
 
 	<bean id="pool"
 		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
