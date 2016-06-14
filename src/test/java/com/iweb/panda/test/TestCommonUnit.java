@@ -386,8 +386,24 @@ public class TestCommonUnit {
 		System.out.println(JsonUtil.toJsonString(r));
 		String str = "{\"id\":1,\"student\":null}";
 		Result r2 = JsonUtil.parseObject(str, Result.class);
-		
+
 		String str2 = "{\"id\":1}";
 		Result r3 = JsonUtil.parseObject(str2, Result.class);
+	}
+
+	@Test
+	public void testArray() {
+		int[] a = new int[6];
+	}
+
+	@Test
+	@SuppressWarnings("all")
+	public void testJSON() {
+		String s = "{\"id\":1,\"name\":\"小明\"}";
+		String s_shao = "{\"id\":1}";
+		String s_duo = "{\"id\":1,\"name\":\"小明\",\"age\":20}";
+//		Student su = JSON.parseObject(s_duo, Student.class);
+		
+		Student su = JsonUtil.parseObject(s_duo, Student.class);
 	}
 }

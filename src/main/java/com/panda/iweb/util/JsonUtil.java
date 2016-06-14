@@ -11,13 +11,22 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class JsonUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonUtil.class);
 	public final static ObjectMapper objectMapper = new ObjectMapper();
+
+	static {
+		// 反序列化配置
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		// 序列化配置
+		objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+	}
 
 	public static String toJsonString(Object o) {
 		try {
