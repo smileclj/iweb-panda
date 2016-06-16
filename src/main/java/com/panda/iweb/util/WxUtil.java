@@ -29,8 +29,8 @@ public class WxUtil {
 	private static final String JSAPI_TICKET_URL = "" + "/webchat/jsapi_ticket/" + 500;
 	// wx
 	private static final String TEMPLATE_MESSAGE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send";
-	private static final String WX_ACCESSTOKEN_KEY = "wx:accessToken";
-	private static final String WX_JSAPITICKET_KEY = "wx:jsapiTicket";
+	// private static final String WX_ACCESSTOKEN_KEY = "wx:accessToken";
+	// private static final String WX_JSAPITICKET_KEY = "wx:jsapiTicket";
 	private static final String KEY = "EA7E0F5D7A164B7DAA9229EB0DB1B7D6";
 
 	// public static AccessToken getAccessToken() {
@@ -159,7 +159,7 @@ public class WxUtil {
 			WxResult<AccessTokenResp> wxResult = JsonUtil.objectMapper.readValue(responseBody, new TypeReference<WxResult<AccessTokenResp>>() {
 			});
 			if (wxResult.getOk()) {
-				String token = wxResult.getDataView().getToken();
+				// String token = wxResult.getDataView().getToken();
 				// AliyunOcsSampleHelp.getIMemcachedCache().add(WX_ACCESSTOKEN_KEY,
 				// wxResult.getExpiresIn(), token);
 			}
@@ -188,7 +188,7 @@ public class WxUtil {
 			WxResult<JsApiTicketResp> wxResult = JsonUtil.objectMapper.readValue(responseBody, new TypeReference<WxResult<JsApiTicketResp>>() {
 			});
 			if (wxResult.getOk()) {
-				String ticket = wxResult.getDataView().getTicket();
+				// String ticket = wxResult.getDataView().getTicket();
 				// AliyunOcsSampleHelp.getIMemcachedCache().add(WX_JSAPITICKET_KEY,
 				// wxResult.getExpiresIn(), ticket);
 			}

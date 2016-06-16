@@ -2,6 +2,7 @@ package com.iweb.panda.test;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URLDecoder;
@@ -24,6 +25,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.CaseFormat;
+import com.iweb.panda.entity.Child;
 import com.iweb.panda.entity.ClassA;
 import com.iweb.panda.entity.ClassB;
 import com.iweb.panda.entity.ClassC;
@@ -35,6 +37,7 @@ import com.panda.iweb.test.reflect.ReflectTest;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
+import com.panda.iweb.util.common.ReflectUtil;
 
 public class TestCommonUnit {
 
@@ -202,7 +205,6 @@ public class TestCommonUnit {
 	@Test
 	public void jdk1_8() {
 		Object[] os = {};
-		Object[] os2 = {};
 		System.out.println(os.getClass().getComponentType());
 
 		Object o = new Object();
@@ -393,7 +395,6 @@ public class TestCommonUnit {
 
 	@Test
 	public void testArray() {
-		int[] a = new int[6];
 	}
 
 	@Test
@@ -402,8 +403,17 @@ public class TestCommonUnit {
 		String s = "{\"id\":1,\"name\":\"小明\"}";
 		String s_shao = "{\"id\":1}";
 		String s_duo = "{\"id\":1,\"name\":\"小明\",\"age\":20}";
-//		Student su = JSON.parseObject(s_duo, Student.class);
-		
+		// Student su = JSON.parseObject(s_duo, Student.class);
+
 		Student su = JsonUtil.parseObject(s_duo, Student.class);
+	}
+
+	@Test
+	@SuppressWarnings("all")
+	public void testReflectUtil() {
+		Child c = new Child();
+		c.setC1("c1");
+		c.setP1("p1");
+		List<Field> fields = ReflectUtil.getFields(c);
 	}
 }
