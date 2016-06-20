@@ -416,4 +416,49 @@ public class TestCommonUnit {
 		c.setP1("p1");
 		List<Field> fields = ReflectUtil.getFields(c);
 	}
+
+	@Test
+	public void testBitOp() {
+		int a = 100;
+		System.out.println(Integer.toBinaryString(a));
+		System.out.println(Integer.toHexString(a));
+		System.out.println(Integer.toOctalString(a));
+		System.out.println(a >> 2);
+	}
+
+	@Test
+	public void inttobyte() {
+		int a = 300000000;
+		System.out.println(a & 0xff);
+		System.out.println(a >> 8 & 0xff);
+		System.out.println(a >> 16 & 0xff);
+		System.out.println(a >> 24 & 0xff);
+	}
+
+	@Test
+	public void bytetoint() {
+		System.out.println(0 & 0xff);
+		System.out.println((163 & 0xff) << 8);
+		System.out.println((225 & 0xff) << 16);
+		System.out.println((17 & 0xff) << 24);
+		System.out.println(41728 + 14745600 + 285212672);
+		System.out.println(0 | 41728 | 14745600 | 285212672);
+	}
+
+	@Test
+	public void bit() {
+		int b = 300;
+		System.out.println(Integer.toBinaryString(b));
+		System.out.println((byte) 300);
+		System.out.println(b & 0xff);
+		System.out.println(Integer.valueOf("10010000", 2));
+		System.out.println(Integer.toBinaryString(-112));
+	}
+
+	@Test
+	public void yu() {
+		System.out.println(Integer.toBinaryString(144));
+		System.out.println(Integer.toBinaryString(256));
+		System.out.println(5 | 4);
+	}
 }
