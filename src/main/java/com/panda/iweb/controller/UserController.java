@@ -21,10 +21,35 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/getUserInfo")
 	public JsonpResult getUserInfo(Integer a, Double b, String c, HttpServletRequest req) {
-		logger.info("getUserInfo");
+		logger.info("authType:{}", req.getAuthType());
+		logger.info("characterEncoding:{}", req.getCharacterEncoding());
+		logger.info("contentType:{}", req.getContentType());
+		logger.info("contextPath:{}", req.getContextPath());
+		logger.info("localAddr:{}", req.getLocalAddr());
+		logger.info("localName:{}", req.getLocalName());
+		logger.info("localPort:{}", req.getLocalPort());
+		logger.info("method:{}", req.getMethod());
+		logger.info("pathInfo:{}", req.getPathInfo());
+		logger.info("pathTranslated:{}", req.getPathTranslated());
+		logger.info("protocol:{}", req.getProtocol());
+		logger.info("queryString:{}", req.getQueryString());
+		logger.info("remoteAddr:{}", req.getRemoteAddr());
+		logger.info("remoteHost:{}", req.getRemoteHost());
+		logger.info("remoteUser:{}", req.getRemoteUser());
+		logger.info("remotePort:{}", req.getRemotePort());
+		logger.info("requestSessionId:{}", req.getRequestedSessionId());
+		logger.info("requestUri:{}", req.getRequestURI());
+		logger.info("scheme:{}", req.getScheme());
+		logger.info("serverName:{}", req.getServerName());
+		logger.info("serverPort:{}", req.getServerPort());
 		logger.info("servletPath:{}", req.getServletPath());
+		logger.info("contentLength:{}", req.getContentLength());
+		logger.info("contentLengthLong:{}", req.getContentLengthLong());
+		logger.info("remotePort:{}", req.getRemotePort());
+		logger.info("requestUrl:{}", req.getRequestURL().toString());
 		logger.info("realpath1{}", req.getServletContext().getRealPath("/"));
 		logger.info("realpath2{}", req.getServletContext().getRealPath(""));
+
 		return result(req, new Result(ErrorCode.SUCCESS));
 	}
 
