@@ -437,4 +437,13 @@ public class TestCommonUnit {
 		System.out.println(Integer.toBinaryString(256));
 		System.out.println(5 | 4);
 	}
+
+	@Test
+	public void testFinally() {
+		try {
+			System.out.println(1 / 0);
+		} finally {
+			System.out.println("我还是执行了");
+		}
+	}
 }

@@ -1,45 +1,48 @@
 package com.panda.iweb.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Student {
-    private Integer id;
+public class Student implements Serializable {
+	private static final long serialVersionUID = -6335997337005876537L;
 
-    private String name;
+	private Integer id;
 
-    private Integer sex;
+	private String name;
 
-    private Date createTime;
+	private Integer sex;
 
-    public Integer getId() {
-        return id;
-    }
+	private Date createTime;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getSex() {
-        return sex;
-    }
+	public void setName(String name) {
+		this.name = name == null ? null : name.trim();
+	}
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
+	public Integer getSex() {
+		return sex;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 }
