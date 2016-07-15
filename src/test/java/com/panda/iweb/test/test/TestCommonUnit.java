@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.WeakHashMap;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -440,10 +441,58 @@ public class TestCommonUnit {
 
 	@Test
 	public void testFinally() {
-		try {
-			System.out.println(1 / 0);
-		} finally {
-			System.out.println("我还是执行了");
+		Integer[] arr = new Integer[] { 1, 2, 3 };
+
+		System.out.println(10 << 2);
+	}
+
+	@Test
+	public void weakhashmap() {
+		WeakHashMap<String, String> w = new WeakHashMap<String, String>();
+		String w1 = new String("a");
+		String w2 = new String("b");
+		w.put(w1, "1");
+		w.put(w2, "2");
+
+		for (Map.Entry<String, String> entry : w.entrySet()) {
+			System.out.println(entry);
+		}
+
+		w1 = null;
+		System.gc();
+
+		for (Map.Entry<String, String> entry : w.entrySet()) {
+			System.out.println(entry);
+		}
+	}
+
+	@Test
+	public void hashmap() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put(null, null);
+	}
+
+	@Test
+	public void jdk7() {
+		byte b = 0b00000001;
+		System.out.println(b);
+		int a = 1000_1000;
+		System.out.println(a);
+	}
+
+	public static void main(String[] args) {
+
+		List<Integer> list = new ArrayList<Integer>() {
+			private static final long serialVersionUID = -1791408691153077543L;
+
+			{
+				add(1);
+				add(2);
+				add(3);
+			}
+		};
+		for (Integer i : list) {
+			list.remove(i);
 		}
 	}
 }
