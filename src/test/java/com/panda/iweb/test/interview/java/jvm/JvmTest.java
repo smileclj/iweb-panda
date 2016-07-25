@@ -52,23 +52,23 @@ public class JvmTest {
 	// -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails
 	// -XX:SurvivorRatio=8
 	public void allocation() {
-		byte[] a1, a2, a3, a4;
-		int one = 1024 * 1024;
-		a1 = new byte[2 * one];
-		a2 = new byte[2 * one];
-		a3 = new byte[2 * one];
-		a4 = new byte[4 * one];
+		// byte[] a1, a2, a3, a4;
+		// int one = 1024 * 1024;
+		// a1 = new byte[2 * one];
+		// a2 = new byte[2 * one];
+		// a3 = new byte[2 * one];
+		// a4 = new byte[4 * one];
 	}
 
 	@Test
 	// -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails
 	// -XX:SurvivorRatio=8
 	public void allocation2() {
-		byte[] a1, a2, a3;
-		int one = 1024 * 1024;
-		a1 = new byte[1024];
-		a2 = new byte[4096];
-		a3 = new byte[3000]; // 触发GC
+		// byte[] a1, a2, a3;
+		// int one = 1024 * 1024;
+		// a1 = new byte[1024];
+		// a2 = new byte[4096];
+		// a3 = new byte[3000]; // 触发GC
 		// a3 = null;
 		// a3 = new byte[3 * one];
 	}

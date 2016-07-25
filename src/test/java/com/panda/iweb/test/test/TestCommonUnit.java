@@ -441,9 +441,9 @@ public class TestCommonUnit {
 
 	@Test
 	public void testFinally() {
-		Integer[] arr = new Integer[] { 1, 2, 3 };
-
-		System.out.println(10 << 2);
+		// Integer[] arr = new Integer[] { 1, 2, 3 };
+		//
+		// System.out.println(10 << 2);
 	}
 
 	@Test
