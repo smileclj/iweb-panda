@@ -24,5 +24,6 @@ public class Test {
         for (int i = 0; i < 100; i++) {
             System.out.println("啦啦啦");
         }
+        System.out.println("over");
     }
 }
