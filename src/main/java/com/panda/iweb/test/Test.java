@@ -21,5 +21,8 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
+        for (int i = 0; i < 100; i++) {
+            System.out.println("啦啦啦");
+        }
     }
 }
