@@ -7,7 +7,7 @@
 
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT"> <!-- SYSTEM_ERR -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %l -> %msg%n" />
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %l -> %msg%n"/>
         </Console>
 
         <RollingFile name="RollingFile"
@@ -18,16 +18,17 @@
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
-                <SizeBasedTriggeringPolicy size="50 MB" />
+                <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
     </Appenders>
-	
+
     <Loggers>
-     	<!-- 3rdparty Loggers -->
-     	<Logger name="com.iweb.panda.mapper" level="DEBUG" />
-        <Logger name="org.mybatis" level="DEBUG" />
-        
+        <!-- 第三方的软件日志级别 -->
+        <Logger name="com.panda.iweb.mapper" level="DEBUG"/>
+        <Logger name="org.mybatis" level="DEBUG"/>
+
+        <!-- 剩余其他的日志级别 -->
         <Root level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="RollingFile"/>

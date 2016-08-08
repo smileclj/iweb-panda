@@ -25,4 +25,14 @@ public interface TestService {
 	void addLotsOfStudents();
 
 	void addLotsOfStudents2();
+
+	void batchInsert(int num);
+
+	void singleInsert();
+
+	void sqlBatchInsert(int num);
+
+	void batchUpdate();
+
+	void sqlBatchUpdate();
 }
