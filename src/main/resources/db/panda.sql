@@ -83,3 +83,8 @@ CREATE TABLE `test_date` (
   `d1` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
+
+create table fill(
+	id1 int ZEROFILL UNSIGNED,
+  id2 int(5) ZEROFILL UNSIGNED
+);
