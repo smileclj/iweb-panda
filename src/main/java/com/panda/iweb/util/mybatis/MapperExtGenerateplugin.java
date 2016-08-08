@@ -127,7 +127,7 @@ public class MapperExtGenerateplugin extends PluginAdapter {
         }
 
         StringBuilder sb = new StringBuilder();
-        String[] packages = targetPackage.split(".");
+        String[] packages = targetPackage.split("\\.");
         for (String p : packages) {
             sb.append(p);
             sb.append(File.separatorChar);
