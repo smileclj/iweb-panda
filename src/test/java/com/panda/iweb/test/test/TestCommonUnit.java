@@ -36,6 +36,8 @@ import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
 import com.panda.iweb.util.common.ReflectUtil;
+import org.springframework.beans.BeanUtils;
+import org.springframework.cglib.core.ReflectUtils;
 
 public class TestCommonUnit {
 
