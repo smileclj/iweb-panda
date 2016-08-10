@@ -5,16 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -480,6 +471,23 @@ public class TestCommonUnit {
 		System.out.println(b);
 		int a = 1000_1000;
 		System.out.println(a);
+	}
+
+	private String createRandomNumber() {
+		StringBuffer str = new StringBuffer();
+		for (int i = 0; i < 16; i++) {
+			if (i == 0) {
+				str.append(new Random().nextInt(9) + 1);
+			} else {
+				str.append(new Random().nextInt(10));
+			}
+		}
+		return str.toString();
+	}
+
+	@Test
+	public void testRan(){
+		System.out.println(createRandomNumber());
 	}
 
 	public static void main(String[] args) {
