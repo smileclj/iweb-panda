@@ -1,9 +1,13 @@
 package com.panda.iweb.test.test;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.panda.iweb.entity.Fill;
+import com.panda.iweb.entity.FillExample;
+import com.panda.iweb.mapper.FillMapperExt;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -25,6 +29,8 @@ public class TestDaoUnit {
 	private StudentMapperExt studentMapperExt;
 	@Resource
 	private CourseMapperExt courseMapperExt;
+	@Resource
+	private FillMapperExt fillMapperExt;
 
 	@Test
 	public void addStudent() {
@@ -40,5 +46,12 @@ public class TestDaoUnit {
 	public void getStudent() {
 		Student student = studentMapperExt.findStudentById(1);
 		logger.info(JsonUtil.toJsonString(student));
+	}
+
+	@Test
+	public void fillzero(){
+		FillExample e_fill = new FillExample();
+		List<Fill> fills = fillMapperExt.selectByExample(e_fill);
+		System.out.println(JsonUtil.toJsonString(fills));
 	}
 }

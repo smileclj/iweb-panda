@@ -1,11 +1,19 @@
-package com.panda.iweb.test;
+package com.panda.iweb.test.jdk.base;
 
 /**
- * Created by Administrator on 2016/8/4.
+ * Created by huixiangdou on 2016/8/5.
  */
-public class Test {
+public class JdkEntity {
     private Integer id;
     private String name;
+
+    public JdkEntity() {
+    }
+
+    public JdkEntity(String name, Integer id) {
+        this.name = name;
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -21,9 +29,5 @@ public class Test {
 
     public void setName(String name) {
         this.name = name;
-        for (int i = 0; i < 100; i++) {
-            System.out.println("啦啦啦");
-        }
-        System.out.println("over");
     }
 }

@@ -1,9 +1,14 @@
 package com.panda.iweb.util.common;
 
+import com.panda.iweb.dto.CourseDto;
+import com.panda.iweb.entity.Course;
+import net.sf.cglib.beans.BeanCopier;
+import org.apache.commons.beanutils.PropertyUtils;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import net.sf.cglib.beans.BeanCopier;
 
 public class BeanUtil {
 
@@ -30,4 +35,28 @@ public class BeanUtil {
     // InvocationTargetException {
     // BeanUtils.copyProperties(dest, orig);
     // }
+
+    public static void main(String[] args) {
+        Course course = new Course();
+        course.setId(1);
+        course.setName("小明");
+        course.setCreateTime(new Date());
+
+        CourseDto dto = new CourseDto();
+        dto.setName("小红");
+
+//        BeanUtil.copyProperties(course,dto);
+//        System.out.println(course);
+
+        try {
+            PropertyUtils.copyProperties(course, dto);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        System.out.println(course);
+    }
 }
