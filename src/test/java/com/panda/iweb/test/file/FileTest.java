@@ -50,4 +50,9 @@ public class FileTest {
 		File target = new File("D:\\2.txt");
 		HttpUtil.downloadFile(url, params, target);
 	}
+
+	@Test
+	public void classpath(){
+		System.out.println(this.getClass().getResource("/test.properties").getFile());
+	}
 }

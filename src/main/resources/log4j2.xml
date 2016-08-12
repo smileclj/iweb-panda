@@ -25,11 +25,15 @@
 
     <Loggers>
         <!-- 第三方的软件日志级别 -->
-        <Logger name="com.panda.iweb.mapper" level="DEBUG"/>
-        <Logger name="org.mybatis" level="DEBUG"/>
+        <Logger name="com.panda.iweb.mapper" level="DEBUG">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <!--<Logger name="org.mybatis" level="DEBUG">-->
+            <!--<AppenderRef ref="CONSOLE"/>-->
+        <!--</Logger>-->
 
         <!-- 剩余其他的日志级别 -->
-        <Root level="DEBUG">
+        <Root level="ERROR">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="RollingFile"/>
         </Root>

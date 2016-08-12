@@ -64,7 +64,7 @@ public class GuavaTest {
 
     /**
      * ReteLimiter
-     * @param args
+     * @param
      */
     public void rateLimiter(){
         RateLimiter rateLimiter = RateLimiter.create(10);

@@ -55,7 +55,7 @@ public class TestServiceUnit {
     @Test
     public void addStudent() {
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1; i++) {
             Student student = new Student();
             student.setName("小美" + i);
             student.setSex(1);
