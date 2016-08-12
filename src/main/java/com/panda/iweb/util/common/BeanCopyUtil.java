@@ -1,8 +1,4 @@
-package com.panda.iweb.util.common;
-
-import com.panda.iweb.dto.CourseDto;
-import com.panda.iweb.entity.Course;
-import org.springframework.beans.BeanUtils;
+package com.dfire.soa.boss.util;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
@@ -11,11 +7,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by chenlj on 2016/8/9.
+ * Created by huixiangdou on 2016/8/9.
+ * 对象拷贝工具类
  */
 public class BeanCopyUtil {
 
@@ -26,8 +22,8 @@ public class BeanCopyUtil {
      * @param target
      * @throws Exception
      */
-    public static void copyProperties(Object source, Object target) throws Exception {
-        copyProperties(source, target, false);
+    public static void copyProperties(Object target, Object source) throws Exception {
+        copyProperties(target, source, false);
     }
 
     /**
@@ -38,8 +34,8 @@ public class BeanCopyUtil {
      * @param ignoreNull
      * @throws Exception
      */
-    public static void copyProperties(Object source, Object target, boolean ignoreNull) throws Exception {
-        copyProperties(source, target, null, ignoreNull);
+    public static void copyProperties(Object target, Object source, boolean ignoreNull) throws Exception {
+        copyProperties(target, source, null, ignoreNull);
     }
 
     /**
@@ -50,12 +46,12 @@ public class BeanCopyUtil {
      * @param ignoreProperties
      * @throws Exception
      */
-    public static void copyProperties(Object source, Object target, String[] ignoreProperties) throws Exception {
-        copyProperties(source, target, ignoreProperties, false);
+    public static void copyProperties(Object target, Object source, String[] ignoreProperties) throws Exception {
+        copyProperties(target, source, ignoreProperties, false);
     }
 
     /**
-     * 对象拷贝，可选择忽略空值和需要忽略的值F
+     * 对象拷贝，可选择忽略空值和需要忽略的值
      *
      * @param source
      * @param target
@@ -63,7 +59,7 @@ public class BeanCopyUtil {
      * @param ignoreNull
      * @throws Exception
      */
-    public static void copyProperties(Object source, Object target, String[] ignoreProperties, boolean ignoreNull) throws Exception {
+    public static void copyProperties(Object target, Object source, String[] ignoreProperties, boolean ignoreNull) throws Exception {
         Class targetClass = target.getClass();
         List<PropertyDescriptor> targetPds = getPropertyDescriptors(targetClass);
         List ignoreList = ignoreProperties != null ? Arrays.asList(ignoreProperties) : null;
@@ -92,31 +88,24 @@ public class BeanCopyUtil {
         }
     }
 
-    private static List<PropertyDescriptor> getPropertyDescriptors(Class<?> clazz) throws IntrospectionException {
+    private static List<PropertyDescriptor> getPropertyDescriptors(Class<?> clazz) {
         List<PropertyDescriptor> pds = new ArrayList<>();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            pds.add(getPropertyDescriptor(clazz, field.getName()));
+            PropertyDescriptor pd = getPropertyDescriptor(clazz, field.getName());
+            if (pd != null) {
+                pds.add(pd);
+            }
         }
         return pds;
     }
 
-    private static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, String propertyName) throws IntrospectionException {
-        return new PropertyDescriptor(propertyName, clazz);
-    }
-
-    public static void main(String[] args) {
-        Course course = new Course();
-        course.setId(1);
-        course.setName("小明");
-        course.setCreateTime(new Date());
-
-        CourseDto courseDto = new CourseDto();
-        courseDto.setName("小红");
+    private static PropertyDescriptor getPropertyDescriptor(Class<?> clazz, String propertyName) {
+        PropertyDescriptor pd = null;
         try {
-            BeanCopyUtil.copyProperties(courseDto, course, true);
-        } catch (Exception e) {
-            e.printStackTrace();
+            pd = new PropertyDescriptor(propertyName, clazz);
+        } catch (IntrospectionException e) {
         }
+        return pd;
     }
 }

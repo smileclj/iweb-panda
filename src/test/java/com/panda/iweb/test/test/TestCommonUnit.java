@@ -505,4 +505,11 @@ public class TestCommonUnit {
 			list.remove(i);
 		}
 	}
+
+	@Test
+	public void testStringBuilder(){
+		StringBuilder sb = new StringBuilder("15868138196");
+		sb.replace(3,7,"****");
+		System.out.println(sb.toString());
+	}
 }
