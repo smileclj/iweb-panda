@@ -3,13 +3,16 @@ package com.panda.iweb.test.test;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.dfire.soa.boss.activation.service.IActivationCodeService;
+import com.dfire.soa.boss.util.BeanCopyUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.CaseFormat;
+import com.panda.iweb.entity.Course;
 import com.panda.iweb.test.entity.*;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
 import com.panda.iweb.util.common.ReflectUtil;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -539,5 +543,126 @@ public class TestCommonUnit {
         long end = System.currentTimeMillis();
         System.out.println(JSON.toJSONString(list));
         System.out.println(String.format("耗时%s毫秒", end - start));
+    }
+
+    @Test
+    public void testCopyWithCglib() {
+        List<CourseDto> courseDtos = new ArrayList<>();
+        for (int i = 0; i < 2000; i++) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setId(i);
+            courseDto.setName("course");
+            courseDto.setCreateTime(new Date());
+            courseDtos.add(courseDto);
+        }
+
+        List<Course> courses = new ArrayList<>();
+        long start = System.currentTimeMillis();
+        for (CourseDto courseDto : courseDtos) {
+            Course course = new Course();
+            BeanUtil.copyProperties(course, courseDto);
+            courses.add(course);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("耗时:" + (end - start) + "毫秒");
+        System.out.println(courses);
+        //55ms
+    }
+
+    @Test
+    public void testCopyWithJdk() {
+        List<CourseDto> courseDtos = new ArrayList<>();
+        for (int i = 0; i < 2000; i++) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setId(i);
+            courseDto.setName("course");
+            courseDto.setCreateTime(new Date());
+            courseDtos.add(courseDto);
+        }
+
+        List<Course> courses = new ArrayList<>();
+        long start = System.currentTimeMillis();
+        for (CourseDto courseDto : courseDtos) {
+            Course course = new Course();
+            try {
+                BeanCopyUtil.copyProperties(course, courseDto);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            courses.add(course);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("耗时:" + (end - start) + "毫秒");
+        System.out.println(courses);
+        //218ms
+    }
+
+    @Test
+    public void testCopyWithApache() {
+        List<CourseDto> courseDtos = new ArrayList<>();
+        for (int i = 0; i < 2000; i++) {
+            CourseDto courseDto = new CourseDto();
+            courseDto.setId(i);
+            courseDto.setName("course");
+            courseDto.setCreateTime(new Date());
+            courseDtos.add(courseDto);
+        }
+
+        List<Course> courses = new ArrayList<>();
+        long start = System.currentTimeMillis();
+        for (CourseDto courseDto : courseDtos) {
+            Course course = new Course();
+
+            try {
+                PropertyUtils.copyProperties(course, courseDto);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            courses.add(course);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("耗时:" + (end - start) + "毫秒");
+        System.out.println(courses);
+        //110ms
+    }
+
+    //spring beanutil和cglib beancopier要求属性类型一致,propertyutils有做类型兼容处理
+    @Test
+    public void testCopyCopy(){
+        EntityPack pack = new EntityPack();
+        pack.setId(1);
+        pack.setAge(2.0);
+        pack.setTime(new Date().getTime());
+
+        EntityBase base1 = new EntityBase();
+        BeanUtil.copyProperties(base1,pack);
+        System.out.println(JSON.toJSONString(base1));
+
+        EntityBase base2 = new EntityBase();
+        try {
+            PropertyUtils.copyProperties(base2,pack);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        System.out.println(JSON.toJSONString(base2));
+
+        EntityBase base3 = new EntityBase();
+        try {
+            BeanCopyUtil.copyProperties(base3,pack);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(JSON.toJSONString(base3));
+
+        System.out.println(int.class == Integer.class);
+        System.out.println(Integer.class == Integer.class);
     }
 }
