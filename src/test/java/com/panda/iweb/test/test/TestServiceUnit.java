@@ -11,7 +11,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
@@ -91,37 +93,54 @@ public class TestServiceUnit {
     }
 
     @Test
-    public void singleInsert() {
+    //耗时:3292毫秒
+    public void batchUpdate() {
+        List<Student> students = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Student student = new Student();
+            student.setId(i);
+            student.setName("小cui");
+            if(i == 4){
+                student.setSex(256);
+            }
+            students.add(student);
+        }
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
-            testService.singleInsert();
+        int row = testService.batchUpdate(students);
+        long end = System.currentTimeMillis();
+        System.out.println(row);
+        System.out.println("耗时:" + (end - start) + "毫秒");
+    }
+
+    @Test
+    public void update() {
+        List<Student> students = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Student student = new Student();
+            student.setId(i);
+            student.setName("小猪");
+            students.add(student);
+        }
+        long start = System.currentTimeMillis();
+        for (Student student : students) {
+            testService.update(student);
         }
         long end = System.currentTimeMillis();
-        System.out.println("batchInsert耗时：" + (end - start) + "ms");
+        System.out.println("耗时:" + (end - start) + "毫秒");
     }
 
     @Test
-    public void sqlBatchInsert(){
+    public void batchUpdateMultiThread() {
+        List<Student> students = new ArrayList<>();
+        for (int i = 1; i <= 10000; i++) {
+            Student student = new Student();
+            student.setId(i);
+            student.setName("小林");
+            students.add(student);
+        }
         long start = System.currentTimeMillis();
-        testService.sqlBatchInsert(10000);
+        testService.batchUpdateMultiThread(students);
         long end = System.currentTimeMillis();
-        System.out.println("batchInsert耗时：" + (end - start) + "ms");
+        System.out.println("耗时:" + (end - start) + "毫秒");
     }
-
-    @Test
-    public void batchUpdate() {
-        long start = System.currentTimeMillis();
-        testService.batchUpdate();
-        long end = System.currentTimeMillis();
-        System.out.println("batchUpdate耗时：" + (end - start) + "ms");
-    }
-
-    @Test
-    public void sqlBatchUpdate(){
-        long start = System.currentTimeMillis();
-        testService.sqlBatchUpdate();
-        long end = System.currentTimeMillis();
-        System.out.println("sqlBatchUpdate耗时：" + (end - start) + "ms");
-    }
-
 }

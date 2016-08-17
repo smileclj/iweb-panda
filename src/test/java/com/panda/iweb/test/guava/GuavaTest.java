@@ -10,7 +10,6 @@ import com.panda.iweb.test.guava.base.GuavaEntity;
 import org.junit.Test;
 
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by huixiangdou on 2016/8/5.
@@ -51,7 +50,7 @@ public class GuavaTest {
                         System.out.println(String.format("key:%s has removed", removalNotification.getKey()));
                     }
                 }).build();
-        cache.put("a","1");
+        cache.put("a", "1");
         System.out.println(cache.getIfPresent("a"));
         cache.invalidate("a"); //移出key:a
         try {
@@ -64,10 +63,19 @@ public class GuavaTest {
 
     /**
      * ReteLimiter
+     * <p>
+     *     如果是控制并发数，可以用
+     * </p>
      * @param
      */
-    public void rateLimiter(){
-        RateLimiter rateLimiter = RateLimiter.create(10);
+    @Test
+    public void rateLimiter() {
+        RateLimiter rateLimiter = RateLimiter.create(1);
+        for (int i = 0; i < 10; i++) {
+            long start = System.currentTimeMillis();
+            System.out.println(rateLimiter.acquire());
+            long end = System.currentTimeMillis();
+        }
     }
 
     public static void main(String[] args) {
