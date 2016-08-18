@@ -22,4 +22,12 @@
 			update student set name = #{student.name},sex = #{student.sex} where id = #{student.id}
 		</foreach>
 	</update>
+
+	<select id="executeQuery" resultType="java.util.Map">
+		${sql}
+	</select>
+
+	<update id="executeUpdate">
+		${sql}
+	</update>
 </mapper>
