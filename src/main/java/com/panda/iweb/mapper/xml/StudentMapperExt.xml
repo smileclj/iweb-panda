@@ -19,7 +19,15 @@
 	
 	<update id="batchUpdate">
 		<foreach collection="students" item="student" index="index" open="" close="" separator=";">
-			update student set name=#{student.name} where id = #{student.id}
+			update student set name = #{student.name},sex = #{student.sex} where id = #{student.id}
 		</foreach>
+	</update>
+
+	<select id="executeQuery" resultType="java.util.Map">
+		${sql}
+	</select>
+
+	<update id="executeUpdate">
+		${sql}
 	</update>
 </mapper>

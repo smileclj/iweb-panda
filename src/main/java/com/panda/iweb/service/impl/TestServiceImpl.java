@@ -10,12 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 @Service("testService")
 public class TestServiceImpl implements TestService {
@@ -160,44 +164,64 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void singleInsert() {
-        Student s = new Student();
-        s.setName("小明");
-        studentMapperExt.insertSelective(s);
+    public int insert(Student student) {
+        return studentMapperExt.insertSelective(student);
     }
 
     @Override
-    public void sqlBatchInsert(int num) {
-        List<Student> students = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            Student s = new Student();
-            s.setName("小明");
-            students.add(s);
-        }
-        studentMapperExt.batchInsert(students);
+    public int batchInsert(List<Student> students) {
+        return studentMapperExt.batchInsert(students);
     }
 
     @Override
-    public void batchUpdate() {
-        for (int i = 0; i < 10000; i++) {
-            Student s = new Student();
-            s.setId(i + 1);
-            s.setName("小红");
-            studentMapperExt.updateByPrimaryKeySelective(s);
-        }
+    public int update(Student student) {
+        return studentMapperExt.updateByPrimaryKeySelective(student);
     }
 
     @Override
-    public void sqlBatchUpdate() {
-        List<Student> students = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
-            Student s = new Student();
-            s.setId(i + 1);
-            s.setName("小张");
-            students.add(s);
+    @Transactional
+    public int batchUpdate(List<Student> students) {
+        return studentMapperExt.batchUpdate(students);
+    }
+
+    @Override
+    public void batchUpdateMultiThread(List<Student> students) {
+        int threadNum = 20;
+        int handleNum = (int) Math.ceil((double) students.size() / threadNum);
+
+        List<Future<List<Integer>>> futures = new ArrayList<>(threadNum);
+        for (int i = 0; i < threadNum; i++) {
+            //分组
+            int start = i * handleNum;
+            int end = i * handleNum + handleNum;
+            end = end > students.size() ? students.size() : end;
+            final List<Student> group = students.subList(start, end);
+            futures.add(pool.submit(new Callable<List<Integer>>() {
+                @Override
+                public List<Integer> call() throws Exception {
+                    return testService.batchUpdateInner(group);
+                }
+            }));
         }
-        studentMapperExt.batchUpdate(students);
+        for (Future<List<Integer>> future : futures) {
+            try {
+                future.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
+    @Override
+    @Transactional
+    public List<Integer> batchUpdateInner(List<Student> students) {
+        List<Integer> result = new ArrayList<>(students.size());
+        for (Student student : students) {
+            result.add(studentMapperExt.updateByPrimaryKeySelective(student));
+        }
+        return result;
+    }
 }

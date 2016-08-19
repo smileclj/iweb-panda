@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.panda.iweb.entity.Student;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface StudentMapperExt extends StudentMapper {
@@ -13,7 +14,11 @@ public interface StudentMapperExt extends StudentMapper {
 
 	Student findStudentById(@Param("id") int id);
 
-	Integer batchInsert(@Param("students") List<Student> students);
+	int batchInsert(@Param("students") List<Student> students);
 
-	Integer batchUpdate(@Param("students") List<Student> students);
+	int batchUpdate(@Param("students") List<Student> students);
+
+	List<Map<String,Object>> executeQuery(@Param("sql") String sql);
+
+	int executeUpdate(@Param("sql") String sql);
 }
