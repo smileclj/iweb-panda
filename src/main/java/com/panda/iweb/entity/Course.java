@@ -9,6 +9,8 @@ public class Course {
 
     private Date createTime;
 
+    private Integer limit_num;
+
     public Integer getId() {
         return id;
     }
@@ -31,5 +33,13 @@ public class Course {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getLimit_num() {
+        return limit_num;
+    }
+
+    public void setLimit_num(Integer limit_num) {
+        this.limit_num = limit_num;
     }
 }

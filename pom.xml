@@ -344,11 +344,13 @@
             <artifactId>hessian</artifactId>
             <version>4.0.38</version>
         </dependency>
+
         <dependency>
-            <groupId>com.dfire.soa</groupId>
-            <artifactId>boss-client</artifactId>
-            <version>1.1.19-SNAPSHOT</version>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>3.2.6</version>
         </dependency>
+
     </dependencies>
 
     <build>

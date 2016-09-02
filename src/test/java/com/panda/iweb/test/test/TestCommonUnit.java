@@ -2,12 +2,15 @@ package com.panda.iweb.test.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dfire.soa.boss.activation.service.IActivationCodeService;
 import com.dfire.soa.boss.util.BeanCopyUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.CaseFormat;
+import com.panda.iweb.entity.Clazz;
+import com.panda.iweb.entity.ClazzDto;
 import com.panda.iweb.entity.Course;
 import com.panda.iweb.test.entity.*;
+import com.panda.iweb.test.rocketmq.Producer;
+import com.panda.iweb.util.BeanUtils;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
 import com.panda.iweb.util.common.NetUtil;
@@ -19,6 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
@@ -29,7 +34,6 @@ import java.util.concurrent.*;
 public class TestCommonUnit {
 
     private static final Logger logger = LoggerFactory.getLogger(TestCommonUnit.class);
-    private IActivationCodeService iActivationCodeService;
 
     @Test
     public void testJackson() {
@@ -632,19 +636,19 @@ public class TestCommonUnit {
 
     //spring beanutil和cglib beancopier要求属性类型一致,propertyutils有做类型兼容处理
     @Test
-    public void testCopyCopy(){
+    public void testCopyCopy() {
         EntityPack pack = new EntityPack();
         pack.setId(1);
         pack.setAge(2.0);
         pack.setTime(new Date().getTime());
 
         EntityBase base1 = new EntityBase();
-        BeanUtil.copyProperties(base1,pack);
+        BeanUtil.copyProperties(base1, pack);
         System.out.println(JSON.toJSONString(base1));
 
         EntityBase base2 = new EntityBase();
         try {
-            PropertyUtils.copyProperties(base2,pack);
+            PropertyUtils.copyProperties(base2, pack);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -656,7 +660,7 @@ public class TestCommonUnit {
 
         EntityBase base3 = new EntityBase();
         try {
-            BeanCopyUtil.copyProperties(base3,pack);
+            BeanCopyUtil.copyProperties(base3, pack);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -664,5 +668,62 @@ public class TestCommonUnit {
 
         System.out.println(int.class == Integer.class);
         System.out.println(Integer.class == Integer.class);
+    }
+
+    @Test
+    public void testInteger() {
+        Integer a = 129;
+        int b = 1;
+        Integer c = 129;
+        Integer d = new Integer(1);
+        System.out.println(a.intValue() == c.intValue());
+
+        Double da = 1.0;
+        Double db = 1.0;
+        System.out.println(da.doubleValue() == db.doubleValue());
+        double double_a = 1.0;
+        double double_b = 1.0;
+        System.out.println(double_a == double_b);
+        System.out.println(double_a == da);
+    }
+
+    @Test
+    public void runtime() {
+        RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
+        String name = runtime.getName();
+        System.out.println(name);
+
+        System.out.println(Producer.class.getName());
+    }
+
+    @Test
+    public void fastjsontest() {
+        Course course = new Course();
+        course.setId(1);
+        course.setName("course");
+        course.setCreateTime(new Date());
+        course.setLimit_num(1);
+
+        System.out.println(JSON.toJSONString(course));
+
+        String s = "{\"createTime\":1472460437432,\"id\":1,\"limit_num\":1,\"name\":\"course\"}";
+        Course c = JSON.parseObject(s, Course.class);
+
+        System.out.println(JSON.toJSONString(c));
+    }
+
+    @Test
+    public void testCopy() {
+        Clazz clazz = new Clazz();
+        Course course = new Course();
+        course.setId(1);
+        course.setName("小明");
+        clazz.setCourse(course);
+        clazz.setId(1);
+
+        ClazzDto clazzDto = new ClazzDto();
+        BeanUtils.copyBean(clazz,clazzDto);
+//        BeanUtil.copyProperties(clazzDto, clazz);
+        clazzDto.getCourse().setId(2);
     }
 }
