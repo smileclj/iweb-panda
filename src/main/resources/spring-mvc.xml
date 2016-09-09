@@ -46,7 +46,7 @@
 	</mvc:annotation-driven>
 
 	<!--全局异常统一处理 -->
-	<bean class="com.panda.iweb.web.interceptors.PandaExceptionInterceptor"></bean>
+	<bean class="com.panda.iweb.web.interceptors.PandaExceptionInterceptor2"></bean>
 
 	<mvc:interceptors>
 		<mvc:interceptor>

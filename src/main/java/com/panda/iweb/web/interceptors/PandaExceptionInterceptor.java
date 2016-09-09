@@ -61,8 +61,8 @@ public class PandaExceptionInterceptor extends ExceptionHandlerExceptionResolver
                     result.setError(ErrorCode.ACTION_NOT_EXIST);
                 } else {
                     // 未知错误，打印堆栈
-                    e.printStackTrace();
-                    logger.error(e.getMessage(), e);
+//                    e.printStackTrace();
+//                    logger.error(e.getMessage(), e);
                     result.setError(ErrorCode.UNKNOW);
                 }
                 writer.write(JsonUtil.toJsonString(result));

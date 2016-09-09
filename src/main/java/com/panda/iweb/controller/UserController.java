@@ -55,6 +55,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public void get(String name, BigDecimal decimal) {
+		System.out.println(1/0);
 		logger.info("get,name:{},decimal:{}", name, decimal);
 	}
 

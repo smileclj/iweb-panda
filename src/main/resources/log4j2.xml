@@ -33,7 +33,7 @@
         </Logger>
 
         <!-- 剩余其他的日志级别 -->
-        <Root level="ERROR">
+        <Root level="DEBUG">
             <AppenderRef ref="CONSOLE"/>
             <AppenderRef ref="RollingFile"/>
         </Root>

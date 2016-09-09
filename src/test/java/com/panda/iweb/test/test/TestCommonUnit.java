@@ -8,6 +8,7 @@ import com.google.common.base.CaseFormat;
 import com.panda.iweb.entity.Clazz;
 import com.panda.iweb.entity.ClazzDto;
 import com.panda.iweb.entity.Course;
+import com.panda.iweb.entity.CourseNew;
 import com.panda.iweb.test.entity.*;
 import com.panda.iweb.test.rocketmq.Producer;
 import com.panda.iweb.util.BeanUtils;
@@ -722,8 +723,51 @@ public class TestCommonUnit {
         clazz.setId(1);
 
         ClazzDto clazzDto = new ClazzDto();
-        BeanUtils.copyBean(clazz,clazzDto);
+        BeanUtils.copyBean(clazz, clazzDto);
 //        BeanUtil.copyProperties(clazzDto, clazz);
         clazzDto.getCourse().setId(2);
+    }
+
+    @Test
+    public void copyLittleFromMore() {
+        CourseNew courseNew = new CourseNew();
+        courseNew.setId(1);
+        courseNew.setLimit_num(1);
+        courseNew.setAddress("address");
+        courseNew.setCreateTime(new Date());
+        courseNew.setName("name");
+
+        Course course1 = new Course();
+        Course course2 = new Course();
+        Course course3 = new Course();
+
+        try {
+            BeanUtil.copyProperties(course1, courseNew);
+            BeanCopyUtil.copyProperties(course2, courseNew);
+            PropertyUtils.copyProperties(course3, courseNew);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void copyMoreFromLittle() {
+        Course course = new Course();
+        course.setId(1);
+        course.setLimit_num(1);
+        course.setCreateTime(new Date());
+        course.setName("name");
+
+        CourseNew courseNew1 = new CourseNew();
+        CourseNew courseNew2 = new CourseNew();
+        CourseNew courseNew3 = new CourseNew();
+
+        try {
+            BeanUtil.copyProperties(courseNew1, course);
+            BeanCopyUtil.copyProperties(courseNew2, course);
+            PropertyUtils.copyProperties(courseNew3, course);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
