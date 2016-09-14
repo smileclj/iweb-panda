@@ -770,4 +770,15 @@ public class TestCommonUnit {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void setProperty() {
+//        System.setProperty("a", "b");
+        Properties properties = System.getProperties();
+        Set<String> keys = properties.stringPropertyNames();
+        for (String key : keys) {
+            Object value = properties.get(key);
+            System.out.println("key:" + key + "  value:" + value);
+        }
+    }
 }
