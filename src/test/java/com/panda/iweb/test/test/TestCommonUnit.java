@@ -781,4 +781,30 @@ public class TestCommonUnit {
             System.out.println("key:" + key + "  value:" + value);
         }
     }
+
+    @Test
+    public void testSubString() {
+        String setMethod = "setPeople";
+        String first = setMethod.substring(3, 4);
+        String tmp = setMethod.substring(4);
+        System.out.println(first.toLowerCase() + tmp);
+    }
+
+    @Test
+    public void testSystem() {
+        //获取环境变量，即在电脑环境变量中配置的值
+        Map<String, String> envs = System.getenv();
+        for (Map.Entry<String, String> entry : envs.entrySet()) {
+            System.out.println("key:" + entry.getKey() + " --- value:" + entry.getValue());
+        }
+
+        //getProperty为系统属性
+    }
+
+    @Test
+    public void testVoid() {
+        Result<Void> r = new Result<>();
+        r.setId(1);
+        System.out.println(JSON.toJSONString(r));
+    }
 }
