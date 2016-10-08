@@ -53,6 +53,8 @@
      		<!--<columnOverride  column="course_id" property="courseId" javaType="java.lang.Integer" jdbcType="INTEGER"/>-->
      		<!--<columnOverride  column="create_time" property="createTime" javaType="java.util.Date"/>-->
      	<!--</table> -->
-		<table tableName="fill"  domainObjectName="Fill" ></table>
+		<table tableName="item"  domainObjectName="Item" >
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+		</table>
 	</context>
 </generatorConfiguration>

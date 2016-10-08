@@ -43,4 +43,6 @@ public interface TestService {
     void batchUpdateMultiThread(List<Student> students);
 
     List<Integer> batchUpdateInner(List<Student> students);
+
+    int updateItemStock(int id);
 }

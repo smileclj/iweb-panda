@@ -100,7 +100,7 @@ public class TestServiceUnit {
             Student student = new Student();
             student.setId(i);
             student.setName("小cui");
-            if(i == 4){
+            if (i == 4) {
                 student.setSex(256);
             }
             students.add(student);
@@ -142,5 +142,23 @@ public class TestServiceUnit {
         testService.batchUpdateMultiThread(students);
         long end = System.currentTimeMillis();
         System.out.println("耗时:" + (end - start) + "毫秒");
+    }
+
+    @Test
+    public void testAutoLock() {
+        for (int i = 0; i < 20; i++) {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getName() + ":" + testService.updateItemStock(1));
+                }
+            });
+            t.start();
+        }
+        try {
+            Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

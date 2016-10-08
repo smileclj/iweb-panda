@@ -3,6 +3,7 @@ package com.panda.iweb.service.impl;
 import com.panda.iweb.entity.Course;
 import com.panda.iweb.entity.Student;
 import com.panda.iweb.mapper.CourseMapperExt;
+import com.panda.iweb.mapper.ItemMapperExt;
 import com.panda.iweb.mapper.StudentMapperExt;
 import com.panda.iweb.service.TestService;
 import com.panda.iweb.util.JsonUtil;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
@@ -34,6 +36,8 @@ public class TestServiceImpl implements TestService {
     private TestService testService;
     @Resource
     private MyTask myTask;
+    @Resource
+    private ItemMapperExt itemMapperExt;
 
     @Override
     public void addStudent(Student student) {
@@ -223,5 +227,22 @@ public class TestServiceImpl implements TestService {
             result.add(studentMapperExt.updateByPrimaryKeySelective(student));
         }
         return result;
+    }
+
+    @Override
+    @Transactional
+    public int updateItemStock(int id) {
+        try {
+            Thread.sleep((new Random().nextInt(3) + 1) * 50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int count = itemMapperExt.updateStock(id);
+        try {
+            Thread.sleep((new Random().nextInt(3) + 1) * 50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
