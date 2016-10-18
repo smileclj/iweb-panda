@@ -807,4 +807,13 @@ public class TestCommonUnit {
         r.setId(1);
         System.out.println(JSON.toJSONString(r));
     }
+
+    @Test
+    public void testFastJsonMap(){
+        Map<String,String> map = new HashMap<>();
+        map.put("1","a");
+
+        String jsonStr = JSON.toJSONString(map);
+        Map<String,String> mapNew = JSONObject.parseObject(jsonStr,Map.class);
+    }
 }
