@@ -9,6 +9,10 @@
 		select id,sex,create_time,address from student where id = #{id}
 	</select>
 
+	<select id="selectMulti" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select * from student where id = #{id} and sex = #{sex}
+	</select>
+
 	<insert id="batchInsert">
 		insert into student (name)
 		values

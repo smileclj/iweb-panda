@@ -42,6 +42,11 @@ public class TestDaoUnit {
     }
 
     @Test
+    public void testSelectMulti(){
+        List<Student> students = studentMapperExt.selectMulti(1,20);
+    }
+
+    @Test
     public void getStudent() {
         Student student = studentMapperExt.findStudentById(1);
         logger.info(JsonUtil.toJsonString(student));
