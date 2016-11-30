@@ -2,7 +2,6 @@ package com.panda.iweb.test.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.dfire.soa.boss.util.BeanCopyUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.CaseFormat;
 import com.panda.iweb.entity.Clazz;
@@ -585,20 +584,20 @@ public class TestCommonUnit {
             courseDtos.add(courseDto);
         }
 
-        List<Course> courses = new ArrayList<>();
-        long start = System.currentTimeMillis();
-        for (CourseDto courseDto : courseDtos) {
-            Course course = new Course();
-            try {
-                BeanCopyUtil.copyProperties(course, courseDto);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            courses.add(course);
-        }
-        long end = System.currentTimeMillis();
-        System.out.println("耗时:" + (end - start) + "毫秒");
-        System.out.println(courses);
+//        List<Course> courses = new ArrayList<>();
+//        long start = System.currentTimeMillis();
+//        for (CourseDto courseDto : courseDtos) {
+//            Course course = new Course();
+//            try {
+//                BeanCopyUtil.copyProperties(course, courseDto);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            courses.add(course);
+//        }
+//        long end = System.currentTimeMillis();
+//        System.out.println("耗时:" + (end - start) + "毫秒");
+//        System.out.println(courses);
         //218ms
     }
 
@@ -660,11 +659,11 @@ public class TestCommonUnit {
         System.out.println(JSON.toJSONString(base2));
 
         EntityBase base3 = new EntityBase();
-        try {
-            BeanCopyUtil.copyProperties(base3, pack);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BeanCopyUtil.copyProperties(base3, pack);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         System.out.println(JSON.toJSONString(base3));
 
         System.out.println(int.class == Integer.class);
@@ -730,24 +729,24 @@ public class TestCommonUnit {
 
     @Test
     public void copyLittleFromMore() {
-        CourseNew courseNew = new CourseNew();
-        courseNew.setId(1);
-        courseNew.setLimit_num(1);
-        courseNew.setAddress("address");
-        courseNew.setCreateTime(new Date());
-        courseNew.setName("name");
-
-        Course course1 = new Course();
-        Course course2 = new Course();
-        Course course3 = new Course();
-
-        try {
-            BeanUtil.copyProperties(course1, courseNew);
-            BeanCopyUtil.copyProperties(course2, courseNew);
-            PropertyUtils.copyProperties(course3, courseNew);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        CourseNew courseNew = new CourseNew();
+//        courseNew.setId(1);
+//        courseNew.setLimit_num(1);
+//        courseNew.setAddress("address");
+//        courseNew.setCreateTime(new Date());
+//        courseNew.setName("name");
+//
+//        Course course1 = new Course();
+//        Course course2 = new Course();
+//        Course course3 = new Course();
+//
+//        try {
+//            BeanUtil.copyProperties(course1, courseNew);
+//            BeanCopyUtil.copyProperties(course2, courseNew);
+//            PropertyUtils.copyProperties(course3, courseNew);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Test
@@ -762,13 +761,13 @@ public class TestCommonUnit {
         CourseNew courseNew2 = new CourseNew();
         CourseNew courseNew3 = new CourseNew();
 
-        try {
-            BeanUtil.copyProperties(courseNew1, course);
-            BeanCopyUtil.copyProperties(courseNew2, course);
-            PropertyUtils.copyProperties(courseNew3, course);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            BeanUtil.copyProperties(courseNew1, course);
+//            BeanCopyUtil.copyProperties(courseNew2, course);
+//            PropertyUtils.copyProperties(courseNew3, course);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Test
@@ -816,4 +815,16 @@ public class TestCommonUnit {
         String jsonStr = JSON.toJSONString(map);
         Map<String,String> mapNew = JSONObject.parseObject(jsonStr,Map.class);
     }
+
+    @Test
+    public void fuhao(){
+        System.out.println(1 | 1);
+        System.out.println(1 | 0);
+        System.out.println(0 | 0);
+
+        String str = "Hello World";
+        System.out.println(str.substring(0,256));
+
+    }
+
 }

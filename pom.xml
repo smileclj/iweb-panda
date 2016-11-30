@@ -357,6 +357,11 @@
             <version>6.2.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+            <version>1.0.22</version>
+        </dependency>
 
     </dependencies>
 
