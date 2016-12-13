@@ -57,7 +57,7 @@ public class TestServiceUnit {
     @Test
     public void addStudent() {
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 1000; i++) {
             Student student = new Student();
             student.setName("小美" + i);
             student.setSex(1);
@@ -87,7 +87,21 @@ public class TestServiceUnit {
     @Test
     public void batchInsert() {
         long start = System.currentTimeMillis();
-        testService.batchInsert(10000);
+        testService.batchInsert(1000);
+        long end = System.currentTimeMillis();
+        System.out.println("batchInsert耗时：" + (end - start) + "ms");
+    }
+
+    @Test
+    public void batchInsert2() {
+        List<Student> students = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            Student s = new Student();
+            s.setName("小明");
+            students.add(s);
+        }
+        long start = System.currentTimeMillis();
+        testService.batchInsert(students);
         long end = System.currentTimeMillis();
         System.out.println("batchInsert耗时：" + (end - start) + "ms");
     }

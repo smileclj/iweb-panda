@@ -9,15 +9,17 @@ import java.util.List;
 
 public class ClientSample {
     public static void main(String args[]) {
+        //10.1.6.65:2181,10.1.6.67:2181,10.1.6.80:2181
+        //10.1.67.22:2181,10.1.67.22:2182,10.1.67.22:2183
         // 创建链接
-        CanalConnector connector = CanalConnectors.newClusterConnector("10.1.64.10:2181,10.1.64.10:2182,10.1.64.10:2183", "example", "", "");
+        CanalConnector connector = CanalConnectors.newClusterConnector("10.1.6.65:2181,10.1.6.67:2181,10.1.6.80:2181", "canal2gp_order_2", "", "");
 //        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
 //                11111), "example", "", "");
         int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
-            connector.subscribe(".*\\..*");
+            connector.subscribe(".*\\.instancedetail,.*\\.o@rderdetail");
             connector.rollback();
             int totalEmtryCount = 1200;
             while (emptyCount < totalEmtryCount) {
@@ -50,6 +52,7 @@ public class ClientSample {
     private static void printEntry(List<CanalEntry.Entry> entrys) {
         for (CanalEntry.Entry entry : entrys) {
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+                System.out.println("收到的是transaction");
                 continue;
             }
             CanalEntry.RowChange rowChage = null;

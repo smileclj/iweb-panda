@@ -152,6 +152,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    @Transactional
     public void batchInsert(int num) {
         for (int i = 0; i < num; i++) {
             Student s = new Student();
@@ -173,6 +174,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    @Transactional
     public int batchInsert(List<Student> students) {
         return studentMapperExt.batchInsert(students);
     }
