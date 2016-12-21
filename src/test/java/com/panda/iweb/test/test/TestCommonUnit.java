@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.management.ManagementFactory;
@@ -29,6 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class TestCommonUnit {
@@ -808,23 +810,32 @@ public class TestCommonUnit {
     }
 
     @Test
-    public void testFastJsonMap(){
-        Map<String,String> map = new HashMap<>();
-        map.put("1","a");
+    public void testFastJsonMap() {
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "a");
 
         String jsonStr = JSON.toJSONString(map);
-        Map<String,String> mapNew = JSONObject.parseObject(jsonStr,Map.class);
+        Map<String, String> mapNew = JSONObject.parseObject(jsonStr, Map.class);
     }
 
     @Test
-    public void fuhao(){
+    public void fuhao() {
         System.out.println(1 | 1);
         System.out.println(1 | 0);
         System.out.println(0 | 0);
 
         String str = "Hello World";
-        System.out.println(str.substring(0,256));
+        System.out.println(str.substring(0, 256));
 
     }
 
+    @Test
+    public void font() {
+        //获取系统中可用的字体的名字
+        GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        String[] fontName = e.getAvailableFontFamilyNames();
+        for (int i = 0; i < fontName.length; i++) {
+            System.out.println(fontName[i]);
+        }
+    }
 }
