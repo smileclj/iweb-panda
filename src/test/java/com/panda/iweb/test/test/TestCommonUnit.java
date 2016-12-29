@@ -838,4 +838,15 @@ public class TestCommonUnit {
             System.out.println(fontName[i]);
         }
     }
+
+    @Test
+    public void j(){
+        Line line = new Line();
+        line.set_id("1");
+        System.out.println(JSON.toJSONString(line));
+
+        String str = "{\"_id\":\"1\"}";
+        Line line1 = JSON.parseObject(str,Line.class);
+        System.out.println(line1.get_id());
+    }
 }

@@ -12,14 +12,14 @@ public class ClientSample {
         //10.1.6.65:2181,10.1.6.67:2181,10.1.6.80:2181
         //10.1.67.22:2181,10.1.67.22:2182,10.1.67.22:2183
         // 创建链接
-        CanalConnector connector = CanalConnectors.newClusterConnector("10.1.6.65:2181,10.1.6.67:2181,10.1.6.80:2181", "canal2gp_order_2", "", "");
+        CanalConnector connector = CanalConnectors.newClusterConnector("10.1.6.65:2181,10.1.6.67:2181,10.1.6.80:2181", "canal2gp_order_4", "", "");
 //        CanalConnector connector = CanalConnectors.newSingleConnector(new InetSocketAddress(AddressUtils.getHostIp(),
 //                11111), "example", "", "");
         int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
-            connector.subscribe(".*\\.instancedetail,.*\\.o@rderdetail");
+            connector.subscribe(".*\\..*");
             connector.rollback();
             int totalEmtryCount = 1200;
             while (emptyCount < totalEmtryCount) {
@@ -28,7 +28,7 @@ public class ClientSample {
                 int size = message.getEntries().size();
                 if (batchId == -1 || size == 0) {
                     emptyCount++;
-//                    System.out.println("empty count : " + emptyCount);
+                    System.out.println("empty count : " + emptyCount);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
