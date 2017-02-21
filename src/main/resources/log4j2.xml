@@ -21,6 +21,18 @@
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
         </RollingFile>
+
+        <RollingFile name="test"
+                     fileName="${LOG_HOME}/${LOG_NAME}/test.log"
+                     filePattern="${LOG_HOME}/${LOG_NAME}/%d{yyyy-MM}/%d{yyyy-MM-dd}/test-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %l -> %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
@@ -29,6 +41,9 @@
             <AppenderRef ref="CONSOLE"/>
         </Logger>
         <Logger name="org.mybatis" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </Logger>
+        <Logger name="test" additivity="false">
             <AppenderRef ref="CONSOLE"/>
         </Logger>
 

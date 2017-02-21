@@ -10,6 +10,7 @@ public class HelloSayDto implements Serializable{
     private int id;
     private String name;
     private String msg;
+//    private String address;
 
     public int getId() {
         return id;
@@ -34,4 +35,12 @@ public class HelloSayDto implements Serializable{
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+//    public String getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
 }

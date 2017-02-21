@@ -76,6 +76,7 @@ public class HttpUtil {
 			}
 			httpclient = HttpClients.createDefault();
 			HttpGet request = new HttpGet(uriBuilder.build());
+			request.setHeader("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 10_2 like Mac OS X) AppleWebKit/602.3.12 (KHTML, like Gecko) Mobile/14C92 MicroMessenger/6.5.3 NetType/WIFI Language/zh_CN");
 			RequestConfig config = RequestConfig.custom().setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT).setSocketTimeout(DEFAULT_READ_TIMEOUT).build();
 			request.setConfig(config);
 			response = httpclient.execute(request);
@@ -614,4 +615,9 @@ abstract class RequestHandler implements FutureCallback<HttpResponse> {
 	}
 
 	public abstract void success(String result);
+
+	public static void main(String[] args) {
+		System.out.println(HttpUtil.get("http://i.zgkqw.com/index.php?g=Wap&m=Voteimg&a=vote&vote_id=15&token=nvnpzg1484111053&id=442&urlcode="));
+
+	}
 }

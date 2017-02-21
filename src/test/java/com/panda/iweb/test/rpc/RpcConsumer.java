@@ -3,6 +3,8 @@ package com.panda.iweb.test.rpc;
 import com.panda.iweb.test.rpc.dto.HelloSayDto;
 import com.panda.iweb.test.rpc.interfaces.HelloInterface;
 
+import java.util.Scanner;
+
 /**
  * Created by huixiangdou on 2016/8/29.
  */
@@ -13,6 +15,11 @@ public class RpcConsumer {
         helloSayDto.setId(1);
         helloSayDto.setName("小明");
         helloSayDto.setMsg("消息");
-        System.out.println(helloInterface.say(helloSayDto));
+
+        Scanner sc = new Scanner(System.in);
+        while(true){
+            sc.next();
+            System.out.println(helloInterface.say(helloSayDto));
+        }
     }
 }

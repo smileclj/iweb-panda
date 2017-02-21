@@ -27,6 +27,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -848,5 +849,19 @@ public class TestCommonUnit {
         String str = "{\"_id\":\"1\"}";
         Line line1 = JSON.parseObject(str,Line.class);
         System.out.println(line1.get_id());
+    }
+
+    @Test
+    public void BigDecimal(){
+//        String s = null;
+//        System.out.println(new BigDecimal(s));
+
+        System.out.println(new BigDecimal("1.0E7").toPlainString());
+    }
+
+    @Test
+    public void testSplit(){
+        String str = "9,13";
+        String[] array = str.split("\\|");
     }
 }
