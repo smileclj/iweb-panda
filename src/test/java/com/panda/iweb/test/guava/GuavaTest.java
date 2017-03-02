@@ -1,9 +1,7 @@
 package com.panda.iweb.test.guava;
 
-import com.google.common.base.CaseFormat;
-import com.google.common.base.Joiner;
+import com.google.common.base.*;
 import com.google.common.base.Objects;
-import com.google.common.base.Splitter;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
@@ -46,7 +44,7 @@ public class GuavaTest {
     @Test
     public void objects() {
         GuavaEntity entity = new GuavaEntity(1, "1");
-        System.out.println(Objects.hashCode(entity));
+        System.out.println(java.util.Objects.hashCode(entity));
         System.out.println(java.util.Objects.hashCode(entity));
         System.out.println(entity.hashCode());
     }
@@ -162,7 +160,6 @@ public class GuavaTest {
      * 并发
      * ListenableFuture
      *
-     * @param args
      */
     @Test
     public void ListenableFuture() {

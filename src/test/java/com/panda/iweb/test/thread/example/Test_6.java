@@ -22,7 +22,7 @@ public class Test_6 {
 	private static CountDownLatch latch = new CountDownLatch(threadNum);
 
 	public static void main(String[] args) throws InterruptedException {
-		Task4 task4 = new Task4();
+		final Task4 task4 = new Task4();
 		Runnable r = new Runnable() {
 			@Override
 			public void run() {

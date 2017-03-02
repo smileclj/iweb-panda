@@ -41,7 +41,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>*.htm</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
@@ -50,10 +50,10 @@
         <error-code>404</error-code>
         <location>/page/error/404.html</location>
     </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/page/error/500.html</location>
-    </error-page>
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
+        <!--<location>/page/error/500.html</location>-->
+    <!--</error-page>-->
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

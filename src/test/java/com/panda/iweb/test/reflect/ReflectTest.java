@@ -11,7 +11,7 @@ public class ReflectTest {
 		System.out.println("className:" + clazz.getName());
 		System.out.println("canonicalName：" + clazz.getCanonicalName());
 		System.out.println("simpleName:" + clazz.getSimpleName());
-		System.out.println("typeName:" + clazz.getTypeName());
+//		System.out.println("typeName:" + clazz.getTypeName());
 
 		System.out.println("=============package===============");
 		Package p = clazz.getPackage();

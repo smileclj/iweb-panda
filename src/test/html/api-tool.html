@@ -5,29 +5,37 @@
     <title>Title</title>
 </head>
 <body>
-    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-        $.ajax({
-            url : 'http://10.1.65.219:8080/boss-api/shop/statistics/v1/list_pay_statistics',
-            data:{
-                token:'api',
-                day:'20161207',
-                entityId:'99926544',
-                isAll:true
-            },
-            beforeSend: function(request) {
-                request.setRequestHeader('isTest', true);
-                request.setRequestHeader('version','sso')
-            },
-            headers:{
-                isTest:true,
-                version:'sso'
-            },
-            dataType : 'jsonp',
-            success : function (data) {
-                alert(data);
-            }
-        });
-    </script>
+<script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script>
+//    var str = "";
+//    $.ajax({
+//        type: 'post',
+//        url: 'http://127.0.0.1:8080/panda-iweb/user/getUserInfo',
+//        headers: {
+//            'content-type': 'text/plain'
+//        },
+//        dataType: 'json',
+//        success: function (data) {
+//            console.log(data);
+//        }
+//    });
+
+
+var xmlHttp = null;
+if (window.XMLHttpRequest) {// code for IE7, Firefox, Opera, etc.
+    xmlHttp = new XMLHttpRequest();
+}
+else if (window.ActiveXObject) {// code for IE6, IE5
+    xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+if (xmlHttp != null) {
+    xmlHttp.open("POST", "http://127.0.0.1:8080/panda-iweb/user/getUserInfo", false);
+    xmlHttp.send("123");
+    console.log(xmlHttp.responseText);
+}
+else {
+    alert("Your browser does not support XMLHTTP.");
+}
+</script>
 </body>
 </html>

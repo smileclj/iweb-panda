@@ -43,7 +43,7 @@ class Factory {
 
 public class Test_7 {
 	public static void main(String[] args) throws InterruptedException {
-		Factory factory = new Factory();
+		final Factory factory = new Factory();
 
 		for (int i = 0; i < 2; i++) {
 			Thread provider = new Thread(new Runnable() {

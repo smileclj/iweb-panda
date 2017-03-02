@@ -75,7 +75,7 @@ class DataCenter {
  */
 public class Test_8 {
 	public static void main(String[] args) {
-		DataCenter dataCenter = new DataCenter();
+		final DataCenter dataCenter = new DataCenter();
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {

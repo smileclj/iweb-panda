@@ -115,7 +115,7 @@ public class TestServiceImpl implements TestService {
     @Override
     public void addLotsOfStudents() {
         int size = 2;
-        CountDownLatch latch = new CountDownLatch(size);
+        final CountDownLatch latch = new CountDownLatch(size);
         for (int i = 0; i < size; i++) {
             pool.execute(new Runnable() {
                 @Override

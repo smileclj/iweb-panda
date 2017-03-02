@@ -9,7 +9,6 @@ import com.panda.iweb.entity.ClazzDto;
 import com.panda.iweb.entity.Course;
 import com.panda.iweb.entity.CourseNew;
 import com.panda.iweb.test.entity.*;
-import com.panda.iweb.test.rocketmq.Producer;
 import com.panda.iweb.util.BeanUtils;
 import com.panda.iweb.util.JsonUtil;
 import com.panda.iweb.util.common.BeanUtil;
@@ -314,14 +313,6 @@ public class TestCommonUnit {
         System.out.println(removeParams(url, new String[]{"a"}));
     }
 
-    @Test
-    @SuppressWarnings("all")
-    public void jsonlib() {
-        String jsonStr = "{\"a\":1}";
-        net.sf.json.JSONObject jsonObj = net.sf.json.JSONObject.fromObject(jsonStr);
-        // DateUtil.now(p, a)
-        JSONObject j1 = JSON.parseObject(jsonStr);
-    }
 
     // @Test
     // @SuppressWarnings("all")
@@ -688,15 +679,6 @@ public class TestCommonUnit {
         double double_b = 1.0;
         System.out.println(double_a == double_b);
         System.out.println(double_a == da);
-    }
-
-    @Test
-    public void runtime() {
-        RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
-        String name = runtime.getName();
-        System.out.println(name);
-
-        System.out.println(Producer.class.getName());
     }
 
     @Test
